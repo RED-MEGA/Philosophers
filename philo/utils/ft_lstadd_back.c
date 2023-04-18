@@ -6,19 +6,19 @@
 /*   By: reben-ha <reben-ha@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/29 19:32:38 by reben-ha          #+#    #+#             */
-/*   Updated: 2023/04/15 05:01:16 by reben-ha         ###   ########.fr       */
+/*   Updated: 2023/04/18 23:55:15 by reben-ha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../Include/utils.h"
 
-void	ft_lstadd_back(t_list **lst, t_list *new)
+void	ft_lstadd_back(t_philo **lst, t_philo **new)
 {
-	t_list	*last;
+	t_philo	*last;
 
-	if (lst == NULL)
+	if (!lst)
 		return ;
-	if (*lst == NULL)
+	if (!(*lst))
 	{
 		*lst = new;
 		return ;

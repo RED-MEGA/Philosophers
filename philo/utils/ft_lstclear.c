@@ -6,20 +6,25 @@
 /*   By: reben-ha <reben-ha@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/29 20:56:51 by reben-ha          #+#    #+#             */
-/*   Updated: 2023/04/15 05:01:16 by reben-ha         ###   ########.fr       */
+/*   Updated: 2023/04/18 23:54:02 by reben-ha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../Include/utils.h"
 
-void	ft_lstclear(t_list **lst)
+void	destroy_all(t_philo **lst)
 {
-	t_list	*tmp;
+	t_philo	*next;
 
+	pthread_mutex_destroy((*lst)->print_access);
+	free((*lst)->time_info) ;
 	while (*lst)
 	{
-		tmp = (*lst)->next;
+		// (*lst)->philo; // destroy pthread_t
+		pthread_mutex_destroy((*lst)->fork);
+		next = (*lst)->next;
 		free(*lst);
-		*lst = tmp;
+		*lst = next;
 	}
+	*lst = NULL;
 }
