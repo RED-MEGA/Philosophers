@@ -6,7 +6,7 @@
 /*   By: reben-ha <reben-ha@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/15 05:00:18 by reben-ha          #+#    #+#             */
-/*   Updated: 2023/04/19 02:56:21 by reben-ha         ###   ########.fr       */
+/*   Updated: 2023/04/19 03:24:30 by reben-ha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,40 +18,25 @@ void	philosophers(char **argv, bool optional_option)
 	t_time			*time_info;
 	pthread_mutex_t	print_access;
 
-	if (!parsing(argv, &time_info, optional_option))
+	if (!parsing(argv, &time_info, optional_option)
+		|| !init(&philo, time_info, &print_access))
 		return ;
-	/* Check */
-	// printf("%d\n", time_info->nb_philo);
-	// printf("%d\n", time_info->time_to_die);
-	// printf("%d\n", time_info->time_to_eat);
-	// printf("%d\n", time_info->time_to_sleep);
-	// printf("%d\n", time_info->limit_eat);
-	// printf("%d\n", optional_option);
 
-
-	init(&philo, time_info, &print_access);
-	/* Check */
-	// while (philo || philo->id >= time_info->nb_philo)
-	// {
-	// 	printf("The id is : %d\n", philo->id);
-	// 	printf("The time_info is : %p\n", philo->time_info);
-	// 	printf("The fork is : %p\n", &philo->fork);
-	// 	philo = philo->next;
-	// }
-
-
-	// run philo
-	int i = -1;
-	while (++i < time_info->nb_philo)
+	// run philo threads
+	while (1)
 	{
 		printf("Philo %d is Started\n", philo->id);
+		printf("%d \n", time_info->nb_philo);
 		if (pthread_create(&philo->philo, NULL, &routine, philo) != 0)
-			printf(ERROR);
+		{
+			perror_x(ERROR);
+			break;
+		}
 		philo = philo->next;
+		if (philo->id == 1)
+			break ;
 	}
 	
-
-
 
 
 

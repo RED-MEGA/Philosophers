@@ -2,7 +2,8 @@
 	"files.associations": {
 		"philo.h": "c",
 		"utils.h": "c",
-		"stdlib.h": "c"
+		"stdlib.h": "c",
+		"const.h": "c"
 	},
 	"C_Cpp.errorSquiggles": "disabled"
 }
