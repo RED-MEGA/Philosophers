@@ -6,7 +6,7 @@
 /*   By: reben-ha <reben-ha@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/15 05:00:18 by reben-ha          #+#    #+#             */
-/*   Updated: 2023/04/19 05:49:21 by reben-ha         ###   ########.fr       */
+/*   Updated: 2023/04/19 22:58:35 by reben-ha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	philosophers(char **argv, bool optional_arg)
 	{
 		if (pthread_create(&philo->philo, NULL, &routine, philo) != 0)
 		{
-			perror_x("Cannot create ");
+			perror_x("Cannot create Thread");
 			break;
 		}
 		philo = philo->next;
@@ -43,7 +43,7 @@ void	philosophers(char **argv, bool optional_arg)
 		// check life stat 
 		// if optional arg enable : Check eat time
 		if (pthread_join(philo->philo, NULL) != 0)
-			printf("Thread is %d finish\n", philo->id);
+			print_stat(philo, "Finished");
 		philo = philo->next;
 	}
 }
