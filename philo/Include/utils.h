@@ -6,23 +6,14 @@
 /*   By: reben-ha <reben-ha@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/06 18:34:12 by reben-ha          #+#    #+#             */
-/*   Updated: 2023/04/18 23:58:02 by reben-ha         ###   ########.fr       */
+/*   Updated: 2023/04/19 00:16:26 by reben-ha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef UTILS_H
 # define UTILS_H
 
-# include <stdlib.h>
-# include <stdio.h>
-# include <string.h>
-# include <stdarg.h>
-# include <fcntl.h>
-# include <unistd.h>
-# include <limits.h>
-# include "../Include/philo.h"
-
-# define FAIL -1
+# include "const.h"
 
 int		ft_atoi(const char *str);
 char	*ft_itoa(int n);
@@ -64,7 +55,7 @@ typedef struct s_list
 }					t_list;
 
 t_philo	*ft_lstnew(int id, t_time *time_info);
-void	ft_lstadd_back(t_philo **lst, t_philo **new);
+void	ft_lstadd_back(t_philo **lst, t_philo *new);
 t_philo	*ft_lstlast(t_philo *lst);
 void	destroy_all(t_philo **lst);
 void	ft_lstadd_front(t_list **lst, t_list *new);

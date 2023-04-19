@@ -1,0 +1,59 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   const.h                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: reben-ha <reben-ha@student.1337.ma>        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/04/19 00:01:56 by reben-ha          #+#    #+#             */
+/*   Updated: 2023/04/19 00:10:13 by reben-ha         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#ifndef CONST_H
+# define CONST_H
+
+# include <stdlib.h>
+# include <stdbool.h>
+# include <stdio.h>
+# include <string.h>
+# include <stdarg.h>
+# include <fcntl.h>
+# include <unistd.h>
+# include <limits.h>
+# include <pthread.h>
+
+/* Macro */
+
+# define ERROR  "\033[31;1mError :\033[0m "
+# define FAIL -1
+# define SUCCESS 0
+
+# define ERRMALLOC "Cannot allocate memory"
+# define ERRFORK "Failed to fork process"
+# define ERRPERMISSION "Permission denied"
+# define ERRINVALID "Invalid argument"
+
+/* Struct */
+
+typedef struct s_time_info
+{
+	int	nb_philo;
+	int	time_to_die;
+	int	time_to_eat;
+	int	time_to_sleep;
+	int	limit_eat;
+}		t_time;
+
+typedef struct s_philo
+{
+	int				id;
+	pthread_t		philo;
+	pthread_mutex_t	fork;
+	pthread_mutex_t	*print_access;
+	t_time			*time_info;
+
+	struct s_philo	*next;
+}					t_philo;
+
+#endif

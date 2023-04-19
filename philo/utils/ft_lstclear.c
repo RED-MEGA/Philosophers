@@ -6,7 +6,7 @@
 /*   By: reben-ha <reben-ha@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/29 20:56:51 by reben-ha          #+#    #+#             */
-/*   Updated: 2023/04/18 23:54:02 by reben-ha         ###   ########.fr       */
+/*   Updated: 2023/04/19 00:20:23 by reben-ha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	destroy_all(t_philo **lst)
 	while (*lst)
 	{
 		// (*lst)->philo; // destroy pthread_t
-		pthread_mutex_destroy((*lst)->fork);
+		pthread_mutex_destroy(&(*lst)->fork);
 		next = (*lst)->next;
 		free(*lst);
 		*lst = next;

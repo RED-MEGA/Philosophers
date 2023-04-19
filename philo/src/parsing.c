@@ -6,7 +6,7 @@
 /*   By: reben-ha <reben-ha@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/16 03:52:47 by reben-ha          #+#    #+#             */
-/*   Updated: 2023/04/17 05:43:59 by reben-ha         ###   ########.fr       */
+/*   Updated: 2023/04/19 00:20:54 by reben-ha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,8 +61,8 @@ bool	parsing(char **argv, t_time **time_info, bool optional_option)
 {
 	if (check_format(&argv[1]) == false)
 		return (false);
-	time_info = (t_time)malloc(sizeof(t_time));
-	if (!time_info)
+	(*time_info) = (t_time *)malloc(sizeof(t_time));
+	if (!(*time_info))
 		return (perror_x("Cannot allocate memory"), false);
 
 	printf("%s\n", argv[1]);
@@ -71,15 +71,14 @@ bool	parsing(char **argv, t_time **time_info, bool optional_option)
 	printf("%s\n", argv[4]);
 	printf("%p\n", argv[5]);
 
-	time_info->nb_philo = ft_atoi(argv[1]);
-	printf("%d = %d\n", id, time_info->nb_philo);
-	// time_info->time_to_die = ft_atoi(argv[2]);
-	// time_info->time_to_eat = ft_atoi(argv[3]);
-	// time_info->time_to_sleep = ft_atoi(argv[4]);
-	// if (optional_option)
-	// 	time_info->limit_eat = ft_atoi(argv[5]);
-	// else
-	// 	time_info->limit_eat = FAIL;
+	(*time_info)->nb_philo = ft_atoi(argv[1]);
+	(*time_info)->time_to_die = ft_atoi(argv[2]);
+	(*time_info)->time_to_eat = ft_atoi(argv[3]);
+	(*time_info)->time_to_sleep = ft_atoi(argv[4]);
+	if (optional_option)
+		(*time_info)->limit_eat = ft_atoi(argv[5]);
+	else
+		(*time_info)->limit_eat = FAIL;
 	return (true);
 }
 
@@ -98,4 +97,5 @@ bool	init(t_philo **philo, t_time *time_info, pthread_mutex_t *print_access)
 		ft_lstadd_back(philo, new_philo);
 	}
 	ft_lstlast(*philo)->next = *philo;
+	return (true);
 }
