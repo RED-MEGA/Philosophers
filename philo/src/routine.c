@@ -6,7 +6,7 @@
 /*   By: reben-ha <reben-ha@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/16 22:19:02 by reben-ha          #+#    #+#             */
-/*   Updated: 2023/04/19 22:58:47 by reben-ha         ###   ########.fr       */
+/*   Updated: 2023/04/19 23:00:32 by reben-ha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,10 @@ static void	delay_maker(bool delay)
 		usleep(1 * 1000);
 }
 
-void	print_stat(t_philo *philo, char *stat)
+void	print_stat(t_philo *philo, char *stat, char *color)
 {
 	pthread_mutex_lock(philo->print_access);
-	printf("Hi I'm philo %d : %s\n", philo->id, stat);
+	printf("Hi I'm philo %d : %s\n", color, philo->id, stat);
 	pthread_mutex_unlock(philo->print_access);
 }
 
