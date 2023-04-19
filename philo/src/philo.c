@@ -6,7 +6,7 @@
 /*   By: reben-ha <reben-ha@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/15 05:00:18 by reben-ha          #+#    #+#             */
-/*   Updated: 2023/04/19 00:23:55 by reben-ha         ###   ########.fr       */
+/*   Updated: 2023/04/19 01:25:43 by reben-ha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,24 +20,29 @@ void	philosophers(char **argv, bool optional_option)
 
 	if (!parsing(argv, &time_info, optional_option))
 		return ;
+	/* Check */
+	// printf("%d\n", time_info->nb_philo);
+	// printf("%d\n", time_info->time_to_die);
+	// printf("%d\n", time_info->time_to_eat);
+	// printf("%d\n", time_info->time_to_sleep);
+	// printf("%d\n", time_info->limit_eat);
+	// printf("%d\n", optional_option);
 
 
+	init(&philo, time_info, &print_access);
+	/* Check */
+	// while (philo || philo->id >= time_info->nb_philo)
+	// {
+	// 	printf("The id is : %d\n", philo->id);
+	// 	printf("The time_info is : %p\n", philo->time_info);
+	// 	printf("The fork is : %p\n", &philo->fork);
+	// 	philo = philo->next;
+	// }
+	
+
+	
 
 
-
-
-
-
-
-
-
-
-	// init philo :
-	// 		create Linked list
-	// 		init time_info inside each node of philo
-	// 		init mutex inside each node of philo
-	// 		init mutex print
-	// init(&philo, time_info, &print_access);
 
 
 
