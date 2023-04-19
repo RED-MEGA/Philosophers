@@ -6,7 +6,7 @@
 /*   By: reben-ha <reben-ha@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/16 03:52:47 by reben-ha          #+#    #+#             */
-/*   Updated: 2023/04/19 00:20:54 by reben-ha         ###   ########.fr       */
+/*   Updated: 2023/04/19 00:24:23 by reben-ha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ static bool	check_format(char **argv)
 	i = -1;
 	while (argv[++i])
 		if (before_nb(argv[i]) == false || after_nb(argv[i]) == false)
-			return (perror_x("Invalid Number"), false);
+			return (perror_x(ERRINVALID), false);
 	return (true);
 }
 
@@ -63,7 +63,7 @@ bool	parsing(char **argv, t_time **time_info, bool optional_option)
 		return (false);
 	(*time_info) = (t_time *)malloc(sizeof(t_time));
 	if (!(*time_info))
-		return (perror_x("Cannot allocate memory"), false);
+		return (perror_x(ERRMALLOC), false);
 
 	printf("%s\n", argv[1]);
 	printf("%s\n", argv[2]);
