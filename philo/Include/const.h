@@ -6,7 +6,7 @@
 /*   By: reben-ha <reben-ha@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/19 00:01:56 by reben-ha          #+#    #+#             */
-/*   Updated: 2023/04/19 23:12:56 by reben-ha         ###   ########.fr       */
+/*   Updated: 2023/04/19 23:38:02 by reben-ha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@
 #define C_SLEEP "\e[1;30m"
 #define C_THINK "\e[1;33m"
 #define C_DEATH "\e[0;101m"
+#define C_RESET "\e[0m"
 
 /* Struct */
 

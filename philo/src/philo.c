@@ -6,7 +6,7 @@
 /*   By: reben-ha <reben-ha@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/15 05:00:18 by reben-ha          #+#    #+#             */
-/*   Updated: 2023/04/19 22:58:35 by reben-ha         ###   ########.fr       */
+/*   Updated: 2023/04/19 23:46:41 by reben-ha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void	philosophers(char **argv, bool optional_arg)
 		// check life stat 
 		// if optional arg enable : Check eat time
 		if (pthread_join(philo->philo, NULL) != 0)
-			print_stat(philo, "Finished");
+			print_stat(philo, "Dead 🧟‍♂️", C_DEATH);
 		philo = philo->next;
 	}
 }

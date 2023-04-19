@@ -6,7 +6,7 @@
 /*   By: reben-ha <reben-ha@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/16 22:19:02 by reben-ha          #+#    #+#             */
-/*   Updated: 2023/04/19 23:00:32 by reben-ha         ###   ########.fr       */
+/*   Updated: 2023/04/19 23:48:51 by reben-ha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static void	delay_maker(bool delay)
 void	print_stat(t_philo *philo, char *stat, char *color)
 {
 	pthread_mutex_lock(philo->print_access);
-	printf("Hi I'm philo %d : %s\n", color, philo->id, stat);
+	printf("%sHi I'm philo %d : %s\n", color, philo->id, stat);
 	pthread_mutex_unlock(philo->print_access);
 }
 
@@ -30,8 +30,8 @@ static void	eating(t_philo *philo)
 	pthread_mutex_lock(&philo->fork);
 	pthread_mutex_lock(&philo->next->fork);
 
-	print_stat(philo, "Take fork");
-	print_stat(philo, "Eating");
+	print_stat(philo, "Take fork", C_EAT);
+	print_stat(philo, "Eating", C_EAT);
 	usleep(philo->time_info->time_to_eat);
 
 	pthread_mutex_unlock(&philo->fork);
@@ -44,13 +44,13 @@ static void	eating(t_philo *philo)
 
 static void	sleeping(t_philo *philo)
 {
-	print_stat(philo, "sleeping");
+	print_stat(philo, "sleeping", C_SLEEP);
 	usleep(philo->time_info->time_to_sleep);
 }
 
 static void	thinking(t_philo *philo)
 {
-	print_stat(philo, "thinking");
+	print_stat(philo, "thinking", C_THINK);
 }
 
 void	*routine(void *ptr)
