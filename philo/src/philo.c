@@ -6,7 +6,7 @@
 /*   By: reben-ha <reben-ha@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/15 05:00:18 by reben-ha          #+#    #+#             */
-/*   Updated: 2023/04/19 05:45:12 by reben-ha         ###   ########.fr       */
+/*   Updated: 2023/04/19 05:49:21 by reben-ha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	philosophers(char **argv, bool optional_arg)
 	{
 		if (pthread_create(&philo->philo, NULL, &routine, philo) != 0)
 		{
-			perror_x(ERROR);
+			perror_x("Cannot create ");
 			break;
 		}
 		philo = philo->next;
