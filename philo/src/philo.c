@@ -6,7 +6,7 @@
 /*   By: reben-ha <reben-ha@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/15 05:00:18 by reben-ha          #+#    #+#             */
-/*   Updated: 2023/04/19 01:25:43 by reben-ha         ###   ########.fr       */
+/*   Updated: 2023/04/19 02:56:21 by reben-ha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,25 +38,38 @@ void	philosophers(char **argv, bool optional_option)
 	// 	printf("The fork is : %p\n", &philo->fork);
 	// 	philo = philo->next;
 	// }
-	
-
-	
-
-
-
-
 
 
 	// run philo
+	int i = -1;
+	while (++i < time_info->nb_philo)
+	{
+		printf("Philo %d is Started\n", philo->id);
+		if (pthread_create(&philo->philo, NULL, &routine, philo) != 0)
+			printf(ERROR);
+		philo = philo->next;
+	}
+	
 
-	// while (1)
-	// {
-	// 	// while(i < num_ph)
-	// 	// {
-	// 	// 	// Check if some of philo day : use time
+
+
+
+
+	// Wait for threads to end her execution
+
+	while (philo)
+	{
+		printf("Thread is %d Wait\n", philo->id);
+		if (pthread_join(philo->philo, NULL) == 0)
+			printf("Thread is %d finish\n", philo->id);
+		philo = philo->next;
+
+		// while(i < num_ph)
+		// {
+		// 	// Check if some of philo day : use time
 			
-	// 	// }
-	// }
+		// }
+	}
 
 }
 

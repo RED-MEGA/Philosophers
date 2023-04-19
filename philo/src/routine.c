@@ -6,15 +6,21 @@
 /*   By: reben-ha <reben-ha@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/16 22:19:02 by reben-ha          #+#    #+#             */
-/*   Updated: 2023/04/16 22:52:51 by reben-ha         ###   ########.fr       */
+/*   Updated: 2023/04/19 02:20:31 by reben-ha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/philo.h"
+#include "../Include/philo.h"
 
-void	routine()
+void	*routine(void *ptr)
 {
+	t_philo	*philo;
+
+	philo = (t_philo *)ptr;
 	// make delay
+	pthread_mutex_lock(philo->print_access);
+	printf("\033[31;1mHI I'M %d THREAD \033[0m\n", philo->id);
+	pthread_mutex_unlock(philo->print_access);
 	while (1)
 	{
 	

@@ -6,7 +6,7 @@
 /*   By: reben-ha <reben-ha@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/15 05:02:14 by reben-ha          #+#    #+#             */
-/*   Updated: 2023/04/19 00:19:21 by reben-ha         ###   ########.fr       */
+/*   Updated: 2023/04/19 02:12:10 by reben-ha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,5 +20,6 @@
 	option [number_of_times_each_philosopher_must_eat] */
 bool	parsing(char **argv, t_time **time_info, bool optional_option);
 bool	init(t_philo **philo, t_time *time_info, pthread_mutex_t *print_access);
+void	*routine(void *ptr);
 
 #endif

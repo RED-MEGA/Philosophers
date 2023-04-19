@@ -6,7 +6,7 @@
 /*   By: reben-ha <reben-ha@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/16 03:52:47 by reben-ha          #+#    #+#             */
-/*   Updated: 2023/04/19 00:52:21 by reben-ha         ###   ########.fr       */
+/*   Updated: 2023/04/19 02:57:47 by reben-ha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ bool	init(t_philo **philo, t_time *time_info, pthread_mutex_t *print_access)
 	pthread_mutex_init(print_access, NULL);
 	(*philo) = NULL;
 	id = 0;
-	while (id++ <= time_info->nb_philo)
+	while (id++ < time_info->nb_philo)
 	{
 		new_philo = ft_lstnew(id, time_info);
 		new_philo->print_access = print_access;
