@@ -6,7 +6,7 @@
 /*   By: reben-ha <reben-ha@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/15 05:00:18 by reben-ha          #+#    #+#             */
-/*   Updated: 2023/04/19 03:24:30 by reben-ha         ###   ########.fr       */
+/*   Updated: 2023/04/19 05:20:28 by reben-ha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,8 @@ void	philosophers(char **argv, bool optional_option)
 	if (!parsing(argv, &time_info, optional_option)
 		|| !init(&philo, time_info, &print_access))
 		return ;
-
-	// run philo threads
 	while (1)
 	{
-		printf("Philo %d is Started\n", philo->id);
-		printf("%d \n", time_info->nb_philo);
 		if (pthread_create(&philo->philo, NULL, &routine, philo) != 0)
 		{
 			perror_x(ERROR);
@@ -44,16 +40,9 @@ void	philosophers(char **argv, bool optional_option)
 
 	while (philo)
 	{
-		printf("Thread is %d Wait\n", philo->id);
-		if (pthread_join(philo->philo, NULL) == 0)
+		if (pthread_join(philo->philo, NULL) != 0)
 			printf("Thread is %d finish\n", philo->id);
 		philo = philo->next;
-
-		// while(i < num_ph)
-		// {
-		// 	// Check if some of philo day : use time
-			
-		// }
 	}
 
 }
