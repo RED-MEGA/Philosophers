@@ -6,19 +6,19 @@
 /*   By: reben-ha <reben-ha@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/15 05:00:18 by reben-ha          #+#    #+#             */
-/*   Updated: 2023/04/19 05:20:28 by reben-ha         ###   ########.fr       */
+/*   Updated: 2023/04/19 05:45:12 by reben-ha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../Include/philo.h"
 
-void	philosophers(char **argv, bool optional_option)
+void	philosophers(char **argv, bool optional_arg)
 {
 	t_philo			*philo;
 	t_time			*time_info;
 	pthread_mutex_t	print_access;
 
-	if (!parsing(argv, &time_info, optional_option)
+	if (!parsing(argv, &time_info, optional_arg)
 		|| !init(&philo, time_info, &print_access))
 		return ;
 	while (1)
@@ -32,19 +32,20 @@ void	philosophers(char **argv, bool optional_option)
 		if (philo->id == 1)
 			break ;
 	}
-	
+
+
 
 
 
 	// Wait for threads to end her execution
-
 	while (philo)
 	{
+		// check life stat 
+		// if optional arg enable : Check eat time
 		if (pthread_join(philo->philo, NULL) != 0)
 			printf("Thread is %d finish\n", philo->id);
 		philo = philo->next;
 	}
-
 }
 
 int	main(int argc, char **argv)

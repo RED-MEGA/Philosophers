@@ -6,7 +6,7 @@
 /*   By: reben-ha <reben-ha@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/16 03:52:47 by reben-ha          #+#    #+#             */
-/*   Updated: 2023/04/19 02:57:47 by reben-ha         ###   ########.fr       */
+/*   Updated: 2023/04/19 05:28:09 by reben-ha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ static bool	check_format(char **argv)
 	return (true);
 }
 
-bool	parsing(char **argv, t_time **time_info, bool optional_option)
+bool	parsing(char **argv, t_time **time_info, bool optional_arg)
 {
 	if (check_format(&argv[1]) == false)
 		return (false);
@@ -68,7 +68,7 @@ bool	parsing(char **argv, t_time **time_info, bool optional_option)
 	(*time_info)->time_to_die = ft_atoi(argv[2]);
 	(*time_info)->time_to_eat = ft_atoi(argv[3]);
 	(*time_info)->time_to_sleep = ft_atoi(argv[4]);
-	if (optional_option)
+	if (optional_arg)
 		(*time_info)->limit_eat = ft_atoi(argv[5]);
 	else
 		(*time_info)->limit_eat = FAIL;

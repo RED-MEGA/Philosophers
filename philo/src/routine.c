@@ -6,7 +6,7 @@
 /*   By: reben-ha <reben-ha@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/16 22:19:02 by reben-ha          #+#    #+#             */
-/*   Updated: 2023/04/19 02:20:31 by reben-ha         ###   ########.fr       */
+/*   Updated: 2023/04/19 05:44:35 by reben-ha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,24 @@ void	*routine(void *ptr)
 	while (1)
 	{
 	
+
 		// Fork
 		// Print stat of philo : take fork
 		// Print stat of philo
+
+		
+		// Reset time
+		// 		Update time stat
+		//		Update eat time 
+
+
 		// Eating
+		// unlock
 
 
+
+
+		// Start timing
 
 		// Print stat of philo
 		// Sleeping
