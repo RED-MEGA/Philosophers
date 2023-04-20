@@ -6,7 +6,7 @@
 /*   By: reben-ha <reben-ha@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/16 03:52:47 by reben-ha          #+#    #+#             */
-/*   Updated: 2023/04/19 05:28:09 by reben-ha         ###   ########.fr       */
+/*   Updated: 2023/04/20 00:29:37 by reben-ha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,25 +57,25 @@ static bool	check_format(char **argv)
 	return (true);
 }
 
-bool	parsing(char **argv, t_time **time_info, bool optional_arg)
+bool	parsing(char **argv, t_info **info, bool optional_arg)
 {
 	if (check_format(&argv[1]) == false)
 		return (false);
-	(*time_info) = (t_time *)malloc(sizeof(t_time));
-	if (!(*time_info))
+	(*info) = (t_info *)malloc(sizeof(t_info));
+	if (!(*info))
 		return (perror_x(ERRMALLOC), false);
-	(*time_info)->nb_philo = ft_atoi(argv[1]);
-	(*time_info)->time_to_die = ft_atoi(argv[2]);
-	(*time_info)->time_to_eat = ft_atoi(argv[3]);
-	(*time_info)->time_to_sleep = ft_atoi(argv[4]);
+	(*info)->nb_philo = ft_atoi(argv[1]);
+	(*info)->time_to_die = ft_atoi(argv[2]);
+	(*info)->time_to_eat = ft_atoi(argv[3]);
+	(*info)->time_to_sleep = ft_atoi(argv[4]);
 	if (optional_arg)
-		(*time_info)->limit_eat = ft_atoi(argv[5]);
+		(*info)->limit_eat = ft_atoi(argv[5]);
 	else
-		(*time_info)->limit_eat = FAIL;
+		(*info)->limit_eat = FAIL;
 	return (true);
 }
 
-bool	init(t_philo **philo, t_time *time_info, pthread_mutex_t *print_access)
+bool	init(t_philo **philo, t_info *info, pthread_mutex_t *print_access)
 {
 	t_philo	*new_philo;
 	int		id;
@@ -83,9 +83,9 @@ bool	init(t_philo **philo, t_time *time_info, pthread_mutex_t *print_access)
 	pthread_mutex_init(print_access, NULL);
 	(*philo) = NULL;
 	id = 0;
-	while (id++ < time_info->nb_philo)
+	while (id++ < info->nb_philo)
 	{
-		new_philo = ft_lstnew(id, time_info);
+		new_philo = ft_lstnew(id, info);
 		new_philo->print_access = print_access;
 		pthread_mutex_init(&(new_philo->fork), NULL);
 		ft_lstadd_back(philo, new_philo);

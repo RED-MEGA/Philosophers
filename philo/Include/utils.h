@@ -6,7 +6,7 @@
 /*   By: reben-ha <reben-ha@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/06 18:34:12 by reben-ha          #+#    #+#             */
-/*   Updated: 2023/04/19 00:16:26 by reben-ha         ###   ########.fr       */
+/*   Updated: 2023/04/20 00:29:37 by reben-ha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ typedef struct s_list
 	struct s_list	*next;
 }					t_list;
 
-t_philo	*ft_lstnew(int id, t_time *time_info);
+t_philo	*ft_lstnew(int id, t_info *info);
 void	ft_lstadd_back(t_philo **lst, t_philo *new);
 t_philo	*ft_lstlast(t_philo *lst);
 void	destroy_all(t_philo **lst);

@@ -6,7 +6,7 @@
 /*   By: reben-ha <reben-ha@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/15 05:00:18 by reben-ha          #+#    #+#             */
-/*   Updated: 2023/04/19 23:46:41 by reben-ha         ###   ########.fr       */
+/*   Updated: 2023/04/20 00:30:00 by reben-ha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,11 @@
 void	philosophers(char **argv, bool optional_arg)
 {
 	t_philo			*philo;
-	t_time			*time_info;
+	t_info			*info;
 	pthread_mutex_t	print_access;
 
-	if (!parsing(argv, &time_info, optional_arg)
-		|| !init(&philo, time_info, &print_access))
+	if (!parsing(argv, &info, optional_arg)
+		|| !init(&philo, info, &print_access))
 		return ;
 	while (1)
 	{
@@ -33,8 +33,7 @@ void	philosophers(char **argv, bool optional_arg)
 			break ;
 	}
 
-
-
+	// gettimeofday();
 
 
 	// Wait for threads to end her execution

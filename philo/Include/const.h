@@ -6,7 +6,7 @@
 /*   By: reben-ha <reben-ha@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/19 00:01:56 by reben-ha          #+#    #+#             */
-/*   Updated: 2023/04/19 23:38:02 by reben-ha         ###   ########.fr       */
+/*   Updated: 2023/04/20 00:29:37 by reben-ha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 # include <fcntl.h>
 # include <unistd.h>
 # include <limits.h>
+# include <sys/time.h>
 # include <pthread.h>
 
 /* Macro */
@@ -43,14 +44,14 @@
 
 /* Struct */
 
-typedef struct s_time_info
+typedef struct s_info
 {
 	int	nb_philo;
 	int	time_to_die;
 	int	time_to_eat;
 	int	time_to_sleep;
 	int	limit_eat;
-}		t_time;
+}		t_info;
 
 typedef struct s_philo
 {
@@ -58,7 +59,7 @@ typedef struct s_philo
 	pthread_t		philo;
 	pthread_mutex_t	fork;
 	pthread_mutex_t	*print_access;
-	t_time			*time_info;
+	t_info			*info;
 
 	struct s_philo	*next;
 }					t_philo;
