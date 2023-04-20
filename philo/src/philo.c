@@ -6,11 +6,19 @@
 /*   By: reben-ha <reben-ha@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/15 05:00:18 by reben-ha          #+#    #+#             */
-/*   Updated: 2023/04/20 00:35:12 by reben-ha         ###   ########.fr       */
+/*   Updated: 2023/04/20 02:59:12 by reben-ha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../Include/philo.h"
+
+long long current_time() 
+{
+	struct timeval current;
+
+	gettimeofday(&current, NULL);
+	return ((current.tv_sec * 1000ll) + (current.tv_usec / 1000ll));
+}
 
 void	philosophers(char **argv, bool optional_arg)
 {
@@ -33,18 +41,27 @@ void	philosophers(char **argv, bool optional_arg)
 			break ;
 	}
 
-	gettimeofday();
-
 
 	// Wait for threads to end her execution
+	delay_maker(true);
 	while (philo)
 	{
-		// check life stat 
-		// if optional arg enable : Check eat time
-		if (pthread_join(philo->philo, NULL) != 0)
+		if ((current_time() - philo->last_meal) >= philo->info->time_to_die
+			|| (optional_arg == true && philo->meal_count == philo->info->limit_eat))
+		{
 			print_stat(philo, "Dead 🧟‍♂️", C_DEATH);
+			break ;
+		}
 		philo = philo->next;
 	}
+	int i = philo->info->nb_philo;
+	while (i-- != 0)
+	{
+		pthread_detach(philo->philo);
+		philo = philo->next;
+	}
+	
+	// destroy_all(&philo);
 }
 
 int	main(int argc, char **argv)

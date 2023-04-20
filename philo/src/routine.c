@@ -6,16 +6,16 @@
 /*   By: reben-ha <reben-ha@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/16 22:19:02 by reben-ha          #+#    #+#             */
-/*   Updated: 2023/04/20 00:37:56 by reben-ha         ###   ########.fr       */
+/*   Updated: 2023/04/20 02:52:08 by reben-ha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../Include/philo.h"
 
-static void	delay_maker(bool delay)
+void	delay_maker(bool delay)
 {
-	if (!delay)
-		usleep(1 * 1000);
+	if (delay)
+		usleep(5 * 1000);
 }
 
 void	print_stat(t_philo *philo, char *stat, char *color)
@@ -30,16 +30,15 @@ static void	eating(t_philo *philo)
 	pthread_mutex_lock(&philo->fork);
 	pthread_mutex_lock(&philo->next->fork);
 
+	philo->meal_count += 1;
+	philo->last_meal = current_time();
+
 	print_stat(philo, "Take fork", C_EAT);
 	print_stat(philo, "Eating", C_EAT);
 	usleep(philo->info->time_to_eat * 1000);
 
 	pthread_mutex_unlock(&philo->fork);
 	pthread_mutex_unlock(&philo->next->fork);
-
-	// Reset time
-	// 		Update time stat
-	//		Update eat time 
 }
 
 static void	sleeping(t_philo *philo)

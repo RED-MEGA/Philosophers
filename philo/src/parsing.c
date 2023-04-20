@@ -6,7 +6,7 @@
 /*   By: reben-ha <reben-ha@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/16 03:52:47 by reben-ha          #+#    #+#             */
-/*   Updated: 2023/04/20 00:29:37 by reben-ha         ###   ########.fr       */
+/*   Updated: 2023/04/20 02:23:01 by reben-ha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,8 @@ bool	init(t_philo **philo, t_info *info, pthread_mutex_t *print_access)
 	{
 		new_philo = ft_lstnew(id, info);
 		new_philo->print_access = print_access;
+		new_philo->meal_count = 0;
+		new_philo->life_stat = true;
 		pthread_mutex_init(&(new_philo->fork), NULL);
 		ft_lstadd_back(philo, new_philo);
 	}

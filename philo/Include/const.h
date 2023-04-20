@@ -6,7 +6,7 @@
 /*   By: reben-ha <reben-ha@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/19 00:01:56 by reben-ha          #+#    #+#             */
-/*   Updated: 2023/04/20 00:35:35 by reben-ha         ###   ########.fr       */
+/*   Updated: 2023/04/20 02:21:43 by reben-ha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,9 +39,8 @@
 #define C_EAT "\e[1;35m"
 #define C_SLEEP "\e[1;30m"
 #define C_THINK "\e[1;33m"
-#define C_DEATH "\e[0;101m"
+#define C_DEATH "\033[1;31m"
 #define C_RESET "\e[0m"
-
 /* Struct */
 
 typedef struct s_info
@@ -59,10 +58,13 @@ typedef struct s_philo
 	pthread_t		philo;
 	pthread_mutex_t	fork;
 	pthread_mutex_t	*print_access;
-	struct timeval	last_meal;
+	long long		last_meal;
+	int				meal_count;
+	int				life_stat;
 	t_info			*info;
 
 	struct s_philo	*next;
 }					t_philo;
+
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: reben-ha <reben-ha@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/15 05:02:14 by reben-ha          #+#    #+#             */
-/*   Updated: 2023/04/20 00:29:37 by reben-ha         ###   ########.fr       */
+/*   Updated: 2023/04/20 01:47:59 by reben-ha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,5 +22,7 @@ bool	parsing(char **argv, t_info **info, bool optional_arg);
 bool	init(t_philo **philo, t_info *info, pthread_mutex_t *print_access);
 void	*routine(void *ptr);
 void	print_stat(t_philo *philo, char *stat, char *color);
+long long current_time();
+void	delay_maker(bool delay);
 
 #endif
