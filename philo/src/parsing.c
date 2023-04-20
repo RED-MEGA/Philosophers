@@ -6,7 +6,7 @@
 /*   By: reben-ha <reben-ha@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/16 03:52:47 by reben-ha          #+#    #+#             */
-/*   Updated: 2023/04/20 02:23:01 by reben-ha         ###   ########.fr       */
+/*   Updated: 2023/04/20 05:33:10 by reben-ha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ bool	parsing(char **argv, t_info **info, bool optional_arg)
 	(*info) = (t_info *)malloc(sizeof(t_info));
 	if (!(*info))
 		return (perror_x(ERRMALLOC), false);
+	(*info)->life_stat = true;
 	(*info)->nb_philo = ft_atoi(argv[1]);
 	(*info)->time_to_die = ft_atoi(argv[2]);
 	(*info)->time_to_eat = ft_atoi(argv[3]);
@@ -75,11 +76,13 @@ bool	parsing(char **argv, t_info **info, bool optional_arg)
 	return (true);
 }
 
-bool	init(t_philo **philo, t_info *info, pthread_mutex_t *print_access)
+bool	init(t_philo **philo, t_info *info)
 {
-	t_philo	*new_philo;
-	int		id;
+	t_philo			*new_philo;
+	pthread_mutex_t	*print_access;
+	int				id;
 
+	print_access = (pthread_mutex_t *)malloc(sizeof(pthread_mutex_t));
 	pthread_mutex_init(print_access, NULL);
 	(*philo) = NULL;
 	id = 0;
@@ -87,9 +90,11 @@ bool	init(t_philo **philo, t_info *info, pthread_mutex_t *print_access)
 	{
 		new_philo = ft_lstnew(id, info);
 		new_philo->print_access = print_access;
-		new_philo->meal_count = 0;
-		new_philo->life_stat = true;
+		new_philo->meal_count.value = 0;
+		new_philo->last_meal.value = current_time();
 		pthread_mutex_init(&(new_philo->fork), NULL);
+		pthread_mutex_init(&(new_philo->last_meal.mutex), NULL);
+		pthread_mutex_init(&(new_philo->meal_count.mutex), NULL);
 		ft_lstadd_back(philo, new_philo);
 	}
 	ft_lstlast(*philo)->next = *philo;

@@ -6,7 +6,7 @@
 /*   By: reben-ha <reben-ha@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/19 00:01:56 by reben-ha          #+#    #+#             */
-/*   Updated: 2023/04/20 02:21:43 by reben-ha         ###   ########.fr       */
+/*   Updated: 2023/04/20 05:31:36 by reben-ha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,13 @@
 #define C_RESET "\e[0m"
 /* Struct */
 
+
+typedef struct s_data
+{
+	long long		value;
+	pthread_mutex_t	mutex;
+}					t_data;
+
 typedef struct s_info
 {
 	int	nb_philo;
@@ -50,6 +57,7 @@ typedef struct s_info
 	int	time_to_eat;
 	int	time_to_sleep;
 	int	limit_eat;
+	int	life_stat;
 }		t_info;
 
 typedef struct s_philo
@@ -58,13 +66,12 @@ typedef struct s_philo
 	pthread_t		philo;
 	pthread_mutex_t	fork;
 	pthread_mutex_t	*print_access;
-	long long		last_meal;
-	int				meal_count;
-	int				life_stat;
+	t_data			last_meal;
+	t_data			meal_count;
+	long long		t0;
 	t_info			*info;
 
 	struct s_philo	*next;
 }					t_philo;
-
 
 #endif

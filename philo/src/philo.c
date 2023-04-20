@@ -6,7 +6,7 @@
 /*   By: reben-ha <reben-ha@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/15 05:00:18 by reben-ha          #+#    #+#             */
-/*   Updated: 2023/04/20 02:59:12 by reben-ha         ###   ########.fr       */
+/*   Updated: 2023/04/20 05:52:47 by reben-ha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,15 +22,17 @@ long long current_time()
 
 void	philosophers(char **argv, bool optional_arg)
 {
+	int				i;
+	long long 		t0;
 	t_philo			*philo;
 	t_info			*info;
-	pthread_mutex_t	print_access;
 
-	if (!parsing(argv, &info, optional_arg)
-		|| !init(&philo, info, &print_access))
+	if (!parsing(argv, &info, optional_arg) || !init(&philo, info))
 		return ;
+	t0 = current_time();
 	while (1)
 	{
+		philo->t0 = t0;
 		if (pthread_create(&philo->philo, NULL, &routine, philo) != 0)
 		{
 			perror_x("Cannot create Thread");
@@ -43,25 +45,33 @@ void	philosophers(char **argv, bool optional_arg)
 
 
 	// Wait for threads to end her execution
-	delay_maker(true);
+	// delay_maker(true);
 	while (philo)
 	{
-		if ((current_time() - philo->last_meal) >= philo->info->time_to_die
-			|| (optional_arg == true && philo->meal_count == philo->info->limit_eat))
+		pthread_mutex_lock(&philo->last_meal.mutex);
+		pthread_mutex_lock(&philo->meal_count.mutex);
+		if ((current_time() - philo->last_meal.value) >= philo->info->time_to_die
+			|| (optional_arg == true && philo->meal_count.value == philo->info->limit_eat))
 		{
-			print_stat(philo, "Dead 🧟‍♂️", C_DEATH);
+			print_stat(philo, "Dead 🧟‍♂️", C_DEATH, false);
 			break ;
 		}
+		pthread_mutex_unlock(&philo->last_meal.mutex);
+		pthread_mutex_unlock(&philo->meal_count.mutex);
 		philo = philo->next;
 	}
-	int i = philo->info->nb_philo;
-	while (i-- != 0)
+
+	info->life_stat = false;
+	pthread_mutex_unlock(philo->print_access);
+
+	i = 0;
+	while (++i <= philo->info->nb_philo)
 	{
-		pthread_detach(philo->philo);
+		pthread_join(philo->philo, NULL);
 		philo = philo->next;
 	}
 	
-	// destroy_all(&philo);
+	destroy_all(&philo);
 }
 
 int	main(int argc, char **argv)
