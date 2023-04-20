@@ -6,7 +6,7 @@
 /*   By: reben-ha <reben-ha@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/19 00:01:56 by reben-ha          #+#    #+#             */
-/*   Updated: 2023/04/20 00:29:37 by reben-ha         ###   ########.fr       */
+/*   Updated: 2023/04/20 00:35:35 by reben-ha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ typedef struct s_philo
 	pthread_t		philo;
 	pthread_mutex_t	fork;
 	pthread_mutex_t	*print_access;
+	struct timeval	last_meal;
 	t_info			*info;
 
 	struct s_philo	*next;

@@ -6,7 +6,7 @@
 /*   By: reben-ha <reben-ha@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/15 05:00:18 by reben-ha          #+#    #+#             */
-/*   Updated: 2023/04/20 00:30:00 by reben-ha         ###   ########.fr       */
+/*   Updated: 2023/04/20 00:35:12 by reben-ha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	philosophers(char **argv, bool optional_arg)
 			break ;
 	}
 
-	// gettimeofday();
+	gettimeofday();
 
 
 	// Wait for threads to end her execution
