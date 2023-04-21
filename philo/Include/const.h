@@ -6,7 +6,7 @@
 /*   By: reben-ha <reben-ha@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/19 00:01:56 by reben-ha          #+#    #+#             */
-/*   Updated: 2023/04/21 08:40:37 by reben-ha         ###   ########.fr       */
+/*   Updated: 2023/04/21 10:39:26 by reben-ha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 # include <unistd.h>
 # include <limits.h>
 # include <sys/time.h>
+# include <time.h>
 # include <pthread.h>
 
 /* Macro */
