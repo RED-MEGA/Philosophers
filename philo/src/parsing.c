@@ -6,7 +6,7 @@
 /*   By: reben-ha <reben-ha@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/16 03:52:47 by reben-ha          #+#    #+#             */
-/*   Updated: 2023/04/20 05:33:10 by reben-ha         ###   ########.fr       */
+/*   Updated: 2023/04/21 08:45:11 by reben-ha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ bool	parsing(char **argv, t_info **info, bool optional_arg)
 	(*info) = (t_info *)malloc(sizeof(t_info));
 	if (!(*info))
 		return (perror_x(ERRMALLOC), false);
-	(*info)->life_stat = true;
+	(*info)->life_stat.value = true;
 	(*info)->nb_philo = ft_atoi(argv[1]);
 	(*info)->time_to_die = ft_atoi(argv[2]);
 	(*info)->time_to_eat = ft_atoi(argv[3]);
@@ -84,6 +84,7 @@ bool	init(t_philo **philo, t_info *info)
 
 	print_access = (pthread_mutex_t *)malloc(sizeof(pthread_mutex_t));
 	pthread_mutex_init(print_access, NULL);
+	pthread_mutex_init(&info->life_stat.mutex, NULL);
 	(*philo) = NULL;
 	id = 0;
 	while (id++ < info->nb_philo)

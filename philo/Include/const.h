@@ -6,7 +6,7 @@
 /*   By: reben-ha <reben-ha@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/19 00:01:56 by reben-ha          #+#    #+#             */
-/*   Updated: 2023/04/20 05:31:36 by reben-ha         ###   ########.fr       */
+/*   Updated: 2023/04/21 08:40:37 by reben-ha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,12 +52,12 @@ typedef struct s_data
 
 typedef struct s_info
 {
-	int	nb_philo;
-	int	time_to_die;
-	int	time_to_eat;
-	int	time_to_sleep;
-	int	limit_eat;
-	int	life_stat;
+	int		nb_philo;
+	int		time_to_die;
+	int		time_to_eat;
+	int		time_to_sleep;
+	int		limit_eat;
+	t_data	life_stat;
 }		t_info;
 
 typedef struct s_philo

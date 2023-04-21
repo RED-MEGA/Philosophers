@@ -6,13 +6,13 @@
 /*   By: reben-ha <reben-ha@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/15 05:00:18 by reben-ha          #+#    #+#             */
-/*   Updated: 2023/04/20 05:52:47 by reben-ha         ###   ########.fr       */
+/*   Updated: 2023/04/21 09:13:31 by reben-ha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../Include/philo.h"
 
-long long current_time() 
+long long current_time()
 {
 	struct timeval current;
 
@@ -60,18 +60,22 @@ void	philosophers(char **argv, bool optional_arg)
 		pthread_mutex_unlock(&philo->meal_count.mutex);
 		philo = philo->next;
 	}
+	pthread_mutex_unlock(&philo->last_meal.mutex);
+	pthread_mutex_unlock(&philo->meal_count.mutex);
 
-	info->life_stat = false;
+	pthread_mutex_lock(&philo->info->life_stat.mutex);
+	info->life_stat.value = false;
+	pthread_mutex_unlock(&philo->info->life_stat.mutex);
 	pthread_mutex_unlock(philo->print_access);
 
-	i = 0;
-	while (++i <= philo->info->nb_philo)
-	{
-		pthread_join(philo->philo, NULL);
-		philo = philo->next;
-	}
+	// i = 0;
+	// while (++i <= philo->info->nb_philo)
+	// {
+	// 	pthread_join(philo->philo, NULL);
+	// 	philo = philo->next;
+	// }
 	
-	destroy_all(&philo);
+	// destroy_all(&philo);
 }
 
 int	main(int argc, char **argv)
