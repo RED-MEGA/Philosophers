@@ -6,7 +6,7 @@
 /*   By: reben-ha <reben-ha@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/16 22:19:02 by reben-ha          #+#    #+#             */
-/*   Updated: 2023/04/21 08:43:59 by reben-ha         ###   ########.fr       */
+/*   Updated: 2023/04/21 09:33:20 by reben-ha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ static void	eating(t_philo *philo)
 		return ;
 	if (print_stat(philo, "Eating", C_EAT, true) == false)
 		return ;
-	usleep(philo->info->time_to_eat * 1000);
+	usleep_x(philo->info->time_to_eat);
 
 	pthread_mutex_unlock(&philo->fork);
 	pthread_mutex_unlock(&philo->next->fork);
@@ -59,7 +59,7 @@ static void	sleeping(t_philo *philo)
 {
 	if (print_stat(philo, "sleeping", C_SLEEP, true) == false)
 		return ;
-	usleep(philo->info->time_to_sleep * 1000);
+	usleep_x(philo->info->time_to_sleep);
 }
 
 static void	thinking(t_philo *philo)

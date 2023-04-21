@@ -6,7 +6,7 @@
 #    By: reben-ha <reben-ha@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/18 16:20:52 by reben-ha          #+#    #+#              #
-#    Updated: 2023/04/21 09:13:48 by reben-ha         ###   ########.fr        #
+#    Updated: 2023/04/21 09:34:56 by reben-ha         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -77,7 +77,7 @@ all : $(NAME)
 $(NAME) : $(OBJ)
 	cc $(FLAGS) $(OBJ) -o $(NAME)
 
-%.o : %.c
+%.o : %.c Include/const.h Include/philo.h Include/utils.h
 	cc $(FLAGS) -c $< -o $@
 
 clean :

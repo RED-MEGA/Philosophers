@@ -6,7 +6,7 @@
 /*   By: reben-ha <reben-ha@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/15 05:00:18 by reben-ha          #+#    #+#             */
-/*   Updated: 2023/04/21 09:13:31 by reben-ha         ###   ########.fr       */
+/*   Updated: 2023/04/21 09:39:35 by reben-ha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,17 @@ long long current_time()
 
 	gettimeofday(&current, NULL);
 	return ((current.tv_sec * 1000ll) + (current.tv_usec / 1000ll));
+}
+
+void	usleep_x(int time_to)
+{
+	// int	i;
+
+	// i = -1;
+	// while (++i <= time_to)
+		// usleep(1000);
+
+	usleep(time_to * 1000);
 }
 
 void	philosophers(char **argv, bool optional_arg)
