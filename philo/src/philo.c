@@ -6,7 +6,7 @@
 /*   By: reben-ha <reben-ha@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/15 05:00:18 by reben-ha          #+#    #+#             */
-/*   Updated: 2023/04/23 20:26:26 by reben-ha         ###   ########.fr       */
+/*   Updated: 2023/04/23 21:20:00 by reben-ha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,20 +48,8 @@ void	run_threads(t_philo *philo)
 	}
 }
 
-
-
-void	philosophers(char **argv, bool optional_arg)
+void	check_threads(t_philo *philo, bool optional_arg)
 {
-	int				i;
-	t_philo			*philo;
-	t_philo			*head;
-	t_info			*info;
-
-	if (!parsing(argv, &info, optional_arg) || !init(&philo, info))
-		return ;
-	head = philo;
-	run_threads(philo);
-
 	while (philo)
 	{
 		pthread_mutex_lock(&philo->last_meal.mutex);
@@ -78,9 +66,14 @@ void	philosophers(char **argv, bool optional_arg)
 		philo = philo->next;
 	}
 	pthread_mutex_lock(&philo->info->life_stat.mutex);
-	info->life_stat.value = false;
+	philo->info->life_stat.value = false;
 	pthread_mutex_unlock(&philo->info->life_stat.mutex);
 	pthread_mutex_unlock(philo->print_access);
+}
+
+void	waiting_threads(t_philo *philo)
+{
+	int	i;
 
 	i = 0;
 	while (++i <= philo->info->nb_philo)
@@ -89,7 +82,19 @@ void	philosophers(char **argv, bool optional_arg)
 			perror_x("Unable to join");
 		philo = philo->next;
 	}
-	destroy_all(head);
+}
+
+void	philosophers(char **argv, bool optional_arg)
+{
+	t_philo			*philo;
+	t_info			*info;
+
+	if (!parsing(argv, &info, optional_arg) || !init(&philo, info))
+		return ;
+	run_threads(philo);
+	check_threads(philo, optional_arg);
+	waiting_threads(philo);
+	destroy_all(philo);
 }
 
 int	main(int argc, char **argv)
