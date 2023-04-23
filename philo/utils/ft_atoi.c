@@ -6,11 +6,18 @@
 /*   By: reben-ha <reben-ha@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 18:42:01 by reben-ha          #+#    #+#             */
-/*   Updated: 2023/04/15 05:01:16 by reben-ha         ###   ########.fr       */
+/*   Updated: 2023/04/23 21:47:12 by reben-ha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../Include/utils.h"
+
+static int	ft_isdigit(int c)
+{
+	if (c >= 48 && c <= 57)
+		return (1);
+	return (0);
+}
 
 static int	result(const char *str, int i, int sg)
 {
