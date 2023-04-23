@@ -6,15 +6,15 @@
 /*   By: reben-ha <reben-ha@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/15 05:00:18 by reben-ha          #+#    #+#             */
-/*   Updated: 2023/04/23 20:01:17 by reben-ha         ###   ########.fr       */
+/*   Updated: 2023/04/23 20:26:26 by reben-ha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../Include/philo.h"
 
-long long current_time()
+long long	current_time(void)
 {
-	struct timeval current;
+	struct timeval	current;
 
 	gettimeofday(&current, NULL);
 	return ((current.tv_sec * 1000ll) + (current.tv_usec / 1000ll));
@@ -29,17 +29,10 @@ void	usleep_x(long long time_to)
 		usleep(10);
 }
 
-void	philosophers(char **argv, bool optional_arg)
+void	run_threads(t_philo *philo)
 {
-	int				i;
-	long long 		t0;
-	t_philo			*philo;
-	t_philo			*head;
-	t_info			*info;
+	long long		t0;
 
-	if (!parsing(argv, &info, optional_arg) || !init(&philo, info))
-		return ;
-	head = philo;
 	t0 = current_time();
 	while (1)
 	{
@@ -47,18 +40,35 @@ void	philosophers(char **argv, bool optional_arg)
 		if (pthread_create(&philo->philo, NULL, &routine, philo) != 0)
 		{
 			perror_x("Cannot create Thread");
-			break;
+			break ;
 		}
 		philo = philo->next;
 		if (philo->id == 1)
 			break ;
 	}
+}
+
+
+
+void	philosophers(char **argv, bool optional_arg)
+{
+	int				i;
+	t_philo			*philo;
+	t_philo			*head;
+	t_info			*info;
+
+	if (!parsing(argv, &info, optional_arg) || !init(&philo, info))
+		return ;
+	head = philo;
+	run_threads(philo);
+
 	while (philo)
 	{
 		pthread_mutex_lock(&philo->last_meal.mutex);
 		pthread_mutex_lock(&philo->meal_count.mutex);
-		if ((current_time() - philo->last_meal.value) >= philo->info->time_to_die
-			|| (optional_arg == true && philo->meal_count.value == philo->info->limit_eat))
+		if (current_time() - philo->last_meal.value >= philo->info->time_to_die
+			|| (optional_arg == true
+				&& philo->meal_count.value == philo->info->limit_eat))
 		{
 			print_stat(philo, "Dead 🧟‍", C_DEATH, false);
 			break ;
