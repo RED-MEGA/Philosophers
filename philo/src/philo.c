@@ -6,7 +6,7 @@
 /*   By: reben-ha <reben-ha@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/15 05:00:18 by reben-ha          #+#    #+#             */
-/*   Updated: 2023/04/21 10:57:14 by reben-ha         ###   ########.fr       */
+/*   Updated: 2023/04/21 18:18:57 by reben-ha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,20 +20,20 @@ long long current_time()
 	return ((current.tv_sec * 1000ll) + (current.tv_usec / 1000ll));
 }
 
-void	usleep_x(int time_to)
+void	usleep_x(long long time_to)
 {
-	// int	i;
+	long long	start;
 
-	// i = -1;
-	// while (++i <= time_to)
-		// usleep(1000);
+	start = current_time();
+	while (current_time() - start < time_to)
+		usleep(10);
 
-	// usleep(time_to * 1000);
 
-    struct timespec sleepTime;
-    sleepTime.tv_sec = 0;
-    sleepTime.tv_nsec = time_to * 1000000;
-    nanosleep(&sleepTime, NULL);
+
+    // struct timespec sleepTime;
+    // sleepTime.tv_sec = 0;
+    // sleepTime.tv_nsec = time_to * 1000000;
+    // nanosleep(&sleepTime, NULL);
      
 }
 
@@ -78,17 +78,17 @@ void	philosophers(char **argv, bool optional_arg)
 		philo = philo->next;
 	}
 
-	// pthread_mutex_lock(&philo->info->life_stat.mutex);
-	// info->life_stat.value = false;
-	// pthread_mutex_unlock(&philo->info->life_stat.mutex);
-	// pthread_mutex_unlock(philo->print_access);
+	pthread_mutex_lock(&philo->info->life_stat.mutex);
+	info->life_stat.value = false;
+	pthread_mutex_unlock(&philo->info->life_stat.mutex);
+	pthread_mutex_unlock(philo->print_access);
 
-	// i = 0;
-	// while (++i <= philo->info->nb_philo)
-	// {
-	// 	pthread_join(philo->philo, NULL);
-	// 	philo = philo->next;
-	// }
+	i = 0;
+	while (++i <= philo->info->nb_philo)
+	{
+		pthread_join(philo->philo, NULL);
+		philo = philo->next;
+	}
 	
 	// destroy_all(&philo);
 }

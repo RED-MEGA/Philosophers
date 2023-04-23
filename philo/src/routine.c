@@ -6,7 +6,7 @@
 /*   By: reben-ha <reben-ha@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/16 22:19:02 by reben-ha          #+#    #+#             */
-/*   Updated: 2023/04/21 10:02:15 by reben-ha         ###   ########.fr       */
+/*   Updated: 2023/04/23 18:04:06 by reben-ha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,21 @@ void	delay_maker(bool delay)
 		usleep(2 * 1000);
 }
 
+bool	get_life_state(t_philo *philo)
+{
+	bool	life_stat;
+
+	pthread_mutex_lock(&philo->info->life_stat.mutex);
+	life_stat = philo->info->life_stat.value;
+	pthread_mutex_unlock(&philo->info->life_stat.mutex);
+	return (life_stat);
+}
+
 bool	print_stat(t_philo *philo, char *stat, char *color, int unlock)
 {
 	pthread_mutex_lock(philo->print_access);
-	// pthread_mutex_lock(&philo->info->life_stat.mutex);
-	// if (!philo->info->life_stat.value)
-	// 	return (false);
-	// pthread_mutex_unlock(&philo->info->life_stat.mutex);
+	if (!get_life_state(philo))
+		return (false);
 	printf("%s%lld : Hi I'm philo %d : %s\n", color, (current_time() - philo->t0), philo->id, stat);
 	if (unlock)
 		pthread_mutex_unlock(philo->print_access);
@@ -36,7 +44,8 @@ static void	eating(t_philo *philo)
 	pthread_mutex_lock(&philo->fork);
 	pthread_mutex_lock(&philo->next->fork);
 
-	
+	if (!get_life_state(philo))
+		return (false);
 	pthread_mutex_lock(&philo->meal_count.mutex);
 	philo->meal_count.value += 1;
 	pthread_mutex_unlock(&philo->meal_count.mutex);
@@ -76,22 +85,16 @@ void	*routine(void *ptr)
 	while (1)
 	{
 		eating(philo);
-		// pthread_mutex_lock(&philo->info->life_stat.mutex);
-		// if (!philo->info->life_stat.value)
-		// 	break ;
-		// pthread_mutex_unlock(&philo->info->life_stat.mutex);
-
+		if (!get_life_state(philo))
+			return (false);
+			
 		sleeping(philo);
-		// pthread_mutex_lock(&philo->info->life_stat.mutex);
-		// if (!philo->info->life_stat.value)
-		// 	break ;
-		// pthread_mutex_unlock(&philo->info->life_stat.mutex);
+		if (!get_life_state(philo))
+			return (false);
 
 		thinking(philo);
-		// pthread_mutex_lock(&philo->info->life_stat.mutex);
-		// if (!philo->info->life_stat.value)
-		// 	break ;
-		// pthread_mutex_unlock(&philo->info->life_stat.mutex);
+		if (!get_life_state(philo))
+			return (false);
 
 	}
 	return (NULL);
