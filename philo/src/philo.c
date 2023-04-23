@@ -6,7 +6,7 @@
 /*   By: reben-ha <reben-ha@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/15 05:00:18 by reben-ha          #+#    #+#             */
-/*   Updated: 2023/04/21 18:18:57 by reben-ha         ###   ########.fr       */
+/*   Updated: 2023/04/23 19:07:45 by reben-ha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,9 +60,6 @@ void	philosophers(char **argv, bool optional_arg)
 			break ;
 	}
 
-
-	// Wait for threads to end her execution
-	// delay_maker(true);
 	while (philo)
 	{
 		pthread_mutex_lock(&philo->last_meal.mutex);
@@ -86,7 +83,8 @@ void	philosophers(char **argv, bool optional_arg)
 	i = 0;
 	while (++i <= philo->info->nb_philo)
 	{
-		pthread_join(philo->philo, NULL);
+		if (pthread_join(philo->philo, NULL) != 0)
+			perror_x("Unable to join");
 		philo = philo->next;
 	}
 	
