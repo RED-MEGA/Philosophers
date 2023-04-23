@@ -6,30 +6,13 @@
 /*   By: reben-ha <reben-ha@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/15 05:00:18 by reben-ha          #+#    #+#             */
-/*   Updated: 2023/04/23 21:21:32 by reben-ha         ###   ########.fr       */
+/*   Updated: 2023/04/23 21:26:49 by reben-ha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../Include/philo.h"
 
-long long	current_time(void)
-{
-	struct timeval	current;
-
-	gettimeofday(&current, NULL);
-	return ((current.tv_sec * 1000ll) + (current.tv_usec / 1000ll));
-}
-
-void	usleep_x(long long time_to)
-{
-	long long	start;
-
-	start = current_time();
-	while (current_time() - start < time_to)
-		usleep(10);
-}
-
-void	run_threads(t_philo *philo)
+static void	run_threads(t_philo *philo)
 {
 	long long		t0;
 
@@ -48,7 +31,7 @@ void	run_threads(t_philo *philo)
 	}
 }
 
-void	check_threads(t_philo *philo, bool optional_arg)
+static void	check_threads(t_philo *philo, bool optional_arg)
 {
 	while (philo)
 	{
@@ -71,7 +54,7 @@ void	check_threads(t_philo *philo, bool optional_arg)
 	pthread_mutex_unlock(philo->print_access);
 }
 
-void	waiting_threads(t_philo *philo)
+static void	waiting_threads(t_philo *philo)
 {
 	int	i;
 
@@ -84,7 +67,7 @@ void	waiting_threads(t_philo *philo)
 	}
 }
 
-void	philosophers(char **argv, bool optional_arg)
+static void	philosophers(char **argv, bool optional_arg)
 {
 	t_philo			*philo;
 	t_info			*info;

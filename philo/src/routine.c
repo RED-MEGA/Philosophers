@@ -6,19 +6,13 @@
 /*   By: reben-ha <reben-ha@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/16 22:19:02 by reben-ha          #+#    #+#             */
-/*   Updated: 2023/04/23 20:09:35 by reben-ha         ###   ########.fr       */
+/*   Updated: 2023/04/23 21:27:55 by reben-ha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../Include/philo.h"
 
-void	delay_maker(bool delay)
-{
-	if (delay)
-		usleep(2 * 1000);
-}
-
-bool	get_life_state(t_philo *philo)
+static bool	get_life_state(t_philo *philo)
 {
 	bool	life_stat;
 
