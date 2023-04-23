@@ -6,7 +6,7 @@
 /*   By: reben-ha <reben-ha@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/19 00:01:56 by reben-ha          #+#    #+#             */
-/*   Updated: 2023/04/23 19:36:59 by reben-ha         ###   ########.fr       */
+/*   Updated: 2023/04/23 20:14:17 by reben-ha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,14 +36,12 @@
 # define ERRPERMISSION "Permission denied"
 # define ERRINVALID "Invalid argument"
 
-
-#define C_EAT "\e[1;35m"
-#define C_SLEEP "\e[1;30m"
-#define C_THINK "\e[1;33m"
-#define C_DEATH "\033[1;31m"
-#define C_RESET "\e[0m"
+# define C_EAT "\e[1;35m"
+# define C_SLEEP "\e[1;30m"
+# define C_THINK "\e[1;33m"
+# define C_DEATH "\033[1;31m"
+# define C_RESET "\e[0m"
 /* Struct */
-
 
 typedef struct s_data
 {
