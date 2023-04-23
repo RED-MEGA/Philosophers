@@ -6,7 +6,7 @@
 /*   By: reben-ha <reben-ha@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/16 22:19:02 by reben-ha          #+#    #+#             */
-/*   Updated: 2023/04/23 18:04:06 by reben-ha         ###   ########.fr       */
+/*   Updated: 2023/04/23 18:05:13 by reben-ha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,6 @@ static void	eating(t_philo *philo)
 	pthread_mutex_lock(&philo->fork);
 	pthread_mutex_lock(&philo->next->fork);
 
-	if (!get_life_state(philo))
-		return (false);
 	pthread_mutex_lock(&philo->meal_count.mutex);
 	philo->meal_count.value += 1;
 	pthread_mutex_unlock(&philo->meal_count.mutex);
