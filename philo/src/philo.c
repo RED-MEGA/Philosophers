@@ -6,7 +6,7 @@
 /*   By: reben-ha <reben-ha@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/15 05:00:18 by reben-ha          #+#    #+#             */
-/*   Updated: 2023/04/23 21:20:00 by reben-ha         ###   ########.fr       */
+/*   Updated: 2023/04/23 21:21:32 by reben-ha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,7 @@ void	philosophers(char **argv, bool optional_arg)
 int	main(int argc, char **argv)
 {
 	if (argc == 5 || argc == 6)
- 		philosophers(argv, (argc == 6));
+		philosophers(argv, (argc == 6));
 	else
 		return (perror_x(ERRINVALID), 1);
 	return (0);
