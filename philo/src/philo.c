@@ -6,7 +6,7 @@
 /*   By: reben-ha <reben-ha@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/15 05:00:18 by reben-ha          #+#    #+#             */
-/*   Updated: 2023/04/23 19:57:41 by reben-ha         ###   ########.fr       */
+/*   Updated: 2023/04/23 20:01:17 by reben-ha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,6 @@ void	philosophers(char **argv, bool optional_arg)
 		if (philo->id == 1)
 			break ;
 	}
-
 	while (philo)
 	{
 		pthread_mutex_lock(&philo->last_meal.mutex);
