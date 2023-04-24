@@ -6,13 +6,13 @@
 /*   By: reben-ha <reben-ha@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/23 21:49:28 by reben-ha          #+#    #+#             */
-/*   Updated: 2023/04/23 21:50:46 by reben-ha         ###   ########.fr       */
+/*   Updated: 2023/04/24 12:49:05 by reben-ha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../Include/utils.h"
 
-t_philo	*ft_lstnew(int id, t_info *info)
+t_philo	*new_philo(int id, t_info *info)
 {
 	t_philo	*newnode;
 
@@ -24,7 +24,7 @@ t_philo	*ft_lstnew(int id, t_info *info)
 	return (newnode);
 }
 
-t_philo	*ft_lstlast(t_philo *lst)
+t_philo	*last_node(t_philo *lst)
 {
 	if (!lst)
 		return (NULL);
@@ -33,7 +33,7 @@ t_philo	*ft_lstlast(t_philo *lst)
 	return (lst);
 }
 
-void	ft_lstadd_back(t_philo **lst, t_philo *new)
+void	add_back(t_philo **lst, t_philo *new)
 {
 	t_philo	*last;
 
@@ -44,11 +44,11 @@ void	ft_lstadd_back(t_philo **lst, t_philo *new)
 		*lst = new;
 		return ;
 	}
-	last = ft_lstlast(*lst);
+	last = last_node(*lst);
 	last->next = new;
 }
 
-void	destroy_all(t_philo *philo)
+void	free_memory(t_philo *philo)
 {
 	t_philo	*tmp;
 

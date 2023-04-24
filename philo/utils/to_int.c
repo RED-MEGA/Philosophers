@@ -1,45 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*   to_int.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: reben-ha <reben-ha@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 18:42:01 by reben-ha          #+#    #+#             */
-/*   Updated: 2023/04/24 12:28:20 by reben-ha         ###   ########.fr       */
+/*   Updated: 2023/04/24 12:43:32 by reben-ha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../Include/utils.h"
 
-int	ft_isdigit(int c)
+int	isnb(int c)
 {
 	if (c >= 48 && c <= 57)
 		return (1);
 	return (0);
 }
 
-static int	result(const char *str, int i, int sg)
+int	to_int(const char *str)
 {
 	size_t	nb;
-
-	nb = 0;
-	while (ft_isdigit(str[i]))
-	{
-		nb = nb * 10 + (((int)str[i]) - 48);
-		i++;
-	}
-	if (nb > 9223372036854775807 && sg == 1)
-		return (-1);
-	else if (nb > 9223372036854775807 && sg == -1)
-		return (0);
-	return (nb * sg);
-}
-
-int	ft_atoi(const char *str)
-{
-	int	i;
-	int	sg;
+	int		i;
+	int		sg;
 
 	sg = 1;
 	i = 0;
@@ -52,5 +36,11 @@ int	ft_atoi(const char *str)
 			sg = -1;
 		i++;
 	}
-	return (result(str, i, sg));
+	nb = 0;
+	while (isnb(str[i]))
+	{
+		nb = nb * 10 + (((int)str[i]) - 48);
+		i++;
+	}
+	return (nb * sg);
 }

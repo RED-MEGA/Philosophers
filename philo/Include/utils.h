@@ -6,7 +6,7 @@
 /*   By: reben-ha <reben-ha@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/06 18:34:12 by reben-ha          #+#    #+#             */
-/*   Updated: 2023/04/24 12:29:05 by reben-ha         ###   ########.fr       */
+/*   Updated: 2023/04/24 12:49:05 by reben-ha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,13 @@
 
 # include "const.h"
 
-int			ft_atoi(const char *str);
-int			ft_isdigit(int c);
+int			to_int(const char *str);
+int			isnb(int c);
 
-t_philo		*ft_lstnew(int id, t_info *info);
-void		ft_lstadd_back(t_philo **lst, t_philo *new);
-t_philo		*ft_lstlast(t_philo *lst);
-void		destroy_all(t_philo *philo);
+t_philo		*new_philo(int id, t_info *info);
+void		add_back(t_philo **lst, t_philo *new);
+t_philo		*last_node(t_philo *lst);
+void		free_memory(t_philo *philo);
 
 void		usleep_x(long long time_to);
 void		delay_maker(bool delay);

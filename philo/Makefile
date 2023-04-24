@@ -6,7 +6,7 @@
 #    By: reben-ha <reben-ha@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/18 16:20:52 by reben-ha          #+#    #+#              #
-#    Updated: 2023/04/24 12:30:56 by reben-ha         ###   ########.fr        #
+#    Updated: 2023/04/24 12:44:10 by reben-ha         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@ FLAGS = -g -pthread -fsanitize=thread#thread#,address  #-Wall -Wextra -Werror
 SRC = src/philo.c \
 	src/parsing.c \
 	src/routine.c \
-	utils/ft_atoi.c \
+	utils/to_int.c \
 	utils/alloc_utils.c \
 	utils/ft_error.c \
 	utils/time_utils.c
