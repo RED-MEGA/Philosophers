@@ -6,7 +6,7 @@
 /*   By: reben-ha <reben-ha@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/16 03:52:47 by reben-ha          #+#    #+#             */
-/*   Updated: 2023/04/24 13:27:07 by reben-ha         ###   ########.fr       */
+/*   Updated: 2023/04/24 20:50:53 by reben-ha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,22 +80,22 @@ bool	init(t_philo **philo, t_info *info)
 {
 	t_philo			*new_philo;
 	pthread_mutex_t	*print_access;
+	sem_t			*fork_sem;
 	int				id;
 
-	print_access = (pthread_mutex_t *)malloc(sizeof(pthread_mutex_t));
-	pthread_mutex_init(print_access, NULL);
-	pthread_mutex_init(&info->life_stat.mutex, NULL);
+	fork_sem = sem_open("fork", O_CREAT, 0644, info->nb_philo);
+
+	info.
+// continue
 	(*philo) = NULL;
 	id = 0;
 	while (id++ < info->nb_philo)
 	{
 		new_philo = new_node(id, info);
-		new_philo->print_access = print_access;
 		new_philo->meal_count.value = 0;
+		new_philo->meal_count.mutex = sem_open("meal_count", O_CREAT, 0644, 1);
 		new_philo->last_meal.value = current_time();
-		pthread_mutex_init(&(new_philo->fork), NULL);
-		pthread_mutex_init(&(new_philo->last_meal.mutex), NULL);
-		pthread_mutex_init(&(new_philo->meal_count.mutex), NULL);
+		new_philo->last_meal.mutex = sem_open("last_meal", O_CREAT, 0644, 1);
 		add_back(philo, new_philo);
 	}
 	last_node(*philo)->next = *philo;

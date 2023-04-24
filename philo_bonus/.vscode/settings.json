@@ -1,6 +1,10 @@
 {
 	"files.associations": {
-		"utils.h": "c"
+		"utils.h": "c",
+		"philo.h": "c",
+		"const.h": "c",
+		"stdio.h": "c",
+		"time.h": "c"
 	},
 	"C_Cpp.errorSquiggles": "disabled"
 }

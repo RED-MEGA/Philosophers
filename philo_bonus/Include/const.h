@@ -6,7 +6,7 @@
 /*   By: reben-ha <reben-ha@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/19 00:01:56 by reben-ha          #+#    #+#             */
-/*   Updated: 2023/04/23 20:14:17 by reben-ha         ###   ########.fr       */
+/*   Updated: 2023/04/24 20:49:59 by reben-ha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@
 # include <sys/time.h>
 # include <time.h>
 # include <pthread.h>
+# include <semaphore.h>
 
 /* Macro */
 
@@ -46,28 +47,28 @@
 typedef struct s_data
 {
 	long long		value;
-	pthread_mutex_t	mutex;
+	sem_t			*sem;
 }					t_data;
 
 typedef struct s_info
 {
-	int		nb_philo;
-	int		time_to_die;
-	int		time_to_eat;
-	int		time_to_sleep;
-	int		limit_eat;
-	t_data	life_stat;
-}			t_info;
+	long long		t0;
+	t_data			life_stat;
+	sem_t			*fork;
+	sem_t			*print_access;
+	int				nb_philo;
+	int				time_to_die;
+	int				time_to_eat;
+	int				time_to_sleep;
+	int				limit_eat;
+}					t_info;
 
 typedef struct s_philo
 {
 	int				id;
-	pthread_t		philo;
-	pthread_mutex_t	fork;
-	pthread_mutex_t	*print_access;
+	pid_t			philo;
 	t_data			last_meal;
 	t_data			meal_count;
-	long long		t0;
 	t_info			*info;
 
 	struct s_philo	*next;
