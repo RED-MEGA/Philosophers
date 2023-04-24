@@ -6,7 +6,7 @@
 #    By: reben-ha <reben-ha@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/18 16:20:52 by reben-ha          #+#    #+#              #
-#    Updated: 2023/04/23 21:53:31 by reben-ha         ###   ########.fr        #
+#    Updated: 2023/04/24 12:30:56 by reben-ha         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,7 @@ SRC = src/philo.c \
 	utils/ft_atoi.c \
 	utils/alloc_utils.c \
 	utils/ft_error.c \
-	utils/time_utils.c \
+	utils/time_utils.c
 
 OBJ = $(SRC:.c=.o)
 

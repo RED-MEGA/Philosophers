@@ -1,33 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strncmp.c                                       :+:      :+:    :+:   */
+/*   time_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: reben-ha <reben-ha@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/14 12:20:23 by reben-ha          #+#    #+#             */
-/*   Updated: 2023/04/15 05:01:16 by reben-ha         ###   ########.fr       */
+/*   Created: 2023/04/23 21:25:49 by reben-ha          #+#    #+#             */
+/*   Updated: 2023/04/23 21:27:20 by reben-ha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../Include/utils.h"
+#include "../Include/philo.h"
 
-int	ft_strncmp(const char *str1, const char *str2, size_t size)
+long long	current_time(void)
 {
-	size_t			i;
-	unsigned char	*s1x;
-	unsigned char	*s2x;
+	struct timeval	current;
 
-	if (str1 == NULL || str2 == NULL)
-		return (-1);
-	s1x = (unsigned char *)str1;
-	s2x = (unsigned char *)str2;
-	i = 0;
-	while (i < size && (s1x[i] != '\0' || s2x[i] != '\0'))
-	{
-		if (s1x[i] != s2x[i])
-			return (s1x[i] - s2x[i]);
-		i++;
-	}
-	return (0);
+	gettimeofday(&current, NULL);
+	return ((current.tv_sec * 1000ll) + (current.tv_usec / 1000ll));
+}
+
+void	usleep_x(long long time_to)
+{
+	long long	start;
+
+	start = current_time();
+	while (current_time() - start < time_to)
+		usleep(10);
+}
+
+void	delay_maker(bool delay)
+{
+	if (delay)
+		usleep(2 * 1000);
 }
