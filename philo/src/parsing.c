@@ -6,7 +6,7 @@
 /*   By: reben-ha <reben-ha@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/16 03:52:47 by reben-ha          #+#    #+#             */
-/*   Updated: 2023/04/24 12:48:03 by reben-ha         ###   ########.fr       */
+/*   Updated: 2023/04/24 13:20:40 by reben-ha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ bool	init(t_philo **philo, t_info *info)
 	id = 0;
 	while (id++ < info->nb_philo)
 	{
-		new_philo = new_philo(id, info);
+		new_philo = nphilo_node(id, info);
 		new_philo->print_access = print_access;
 		new_philo->meal_count.value = 0;
 		new_philo->last_meal.value = current_time();

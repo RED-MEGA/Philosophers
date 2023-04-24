@@ -6,13 +6,13 @@
 /*   By: reben-ha <reben-ha@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/23 21:49:28 by reben-ha          #+#    #+#             */
-/*   Updated: 2023/04/24 12:49:05 by reben-ha         ###   ########.fr       */
+/*   Updated: 2023/04/24 13:20:49 by reben-ha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../Include/utils.h"
 
-t_philo	*new_philo(int id, t_info *info)
+t_philo	*nphilo_node(int id, t_info *info)
 {
 	t_philo	*newnode;
 
