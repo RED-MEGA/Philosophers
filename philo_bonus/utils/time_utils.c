@@ -1,20 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philo.c                                            :+:      :+:    :+:   */
+/*   time_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: reben-ha <reben-ha@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/15 05:00:18 by reben-ha          #+#    #+#             */
-/*   Updated: 2023/04/15 05:14:28 by reben-ha         ###   ########.fr       */
+/*   Created: 2023/04/23 21:25:49 by reben-ha          #+#    #+#             */
+/*   Updated: 2023/04/23 21:27:20 by reben-ha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../Include/philo.h"
 
-int	main(int argc, char **argv)
+long long	current_time(void)
 {
-	if (argc < 2)
-		return ((void)printf("Error : Invalid argument\n"), 1);
-	return (0);
+	struct timeval	current;
+
+	gettimeofday(&current, NULL);
+	return ((current.tv_sec * 1000ll) + (current.tv_usec / 1000ll));
+}
+
+void	usleep_x(long long time_to)
+{
+	long long	start;
+
+	start = current_time();
+	while (current_time() - start < time_to)
+		usleep(10);
+}
+
+void	delay_maker(bool delay)
+{
+	if (delay)
+		usleep(2 * 1000);
 }
