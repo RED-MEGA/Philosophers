@@ -6,7 +6,7 @@
 /*   By: reben-ha <reben-ha@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/06 18:34:12 by reben-ha          #+#    #+#             */
-/*   Updated: 2023/04/24 13:20:19 by reben-ha         ###   ########.fr       */
+/*   Updated: 2023/04/24 13:27:12 by reben-ha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 int			to_int(const char *str);
 int			isnb(int c);
 
-t_philo		*nphilo_node(int id, t_info *info);
+t_philo		*new_node(int id, t_info *info);
 void		add_back(t_philo **lst, t_philo *new);
 t_philo		*last_node(t_philo *lst);
 void		free_memory(t_philo *philo);
