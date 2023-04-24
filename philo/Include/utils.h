@@ -6,7 +6,7 @@
 /*   By: reben-ha <reben-ha@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/06 18:34:12 by reben-ha          #+#    #+#             */
-/*   Updated: 2023/04/23 21:47:18 by reben-ha         ###   ########.fr       */
+/*   Updated: 2023/04/24 12:14:21 by reben-ha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,6 @@
 # include "const.h"
 
 int			ft_atoi(const char *str);
-
-void		ft_putstr_fd(char *s, int fd);
 
 t_philo		*ft_lstnew(int id, t_info *info);
 void		ft_lstadd_back(t_philo **lst, t_philo *new);
