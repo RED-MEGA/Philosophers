@@ -6,7 +6,7 @@
 /*   By: reben-ha <reben-ha@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/16 03:52:47 by reben-ha          #+#    #+#             */
-/*   Updated: 2023/04/25 12:42:33 by reben-ha         ###   ########.fr       */
+/*   Updated: 2023/04/25 16:21:37 by reben-ha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,17 +82,16 @@ bool	init(t_philo **philo, t_info *info)
 	int		id;
 
 	(*philo) = NULL;
-	info->fork = sem_open("/fork", O_CREAT, 0644, info->nb_philo);
-	info->print_access = sem_open("/print_access", O_CREAT, 0644, 1);
-	info->life_stat.sem = sem_open("/life_stat", O_CREAT, 0644, 1);
+	new_sem(&info->fork, info->nb_philo, "fork", false);
+	new_sem(&info->print_access, 1, "print_access", false);
+	new_sem(&info->life_stat, 1, "life_stat", false);
 	id = 0;
 	while (id++ < info->nb_philo)
 	{
 		new_philo = new_node(id, info);
+		new_sem(&new_philo->last_meal, 1, "last_meal", true);
+		new_sem(&new_philo->meal_count, 1, "meal_count", true);
 		new_philo->meal_count.value = 0;
-		new_philo->meal_count.sem = sem_open("/meal_count", O_CREAT, 0644, 1);
-		new_philo->last_meal.value = current_time(); // Move time
-		new_philo->last_meal.sem = sem_open("/last_meal", O_CREAT, 0644, 1);
 		add_back(philo, new_philo);
 	}
 	last_node(*philo)->next = *philo;

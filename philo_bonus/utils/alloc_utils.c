@@ -6,7 +6,7 @@
 /*   By: reben-ha <reben-ha@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/23 21:49:28 by reben-ha          #+#    #+#             */
-/*   Updated: 2023/04/24 13:27:14 by reben-ha         ###   ########.fr       */
+/*   Updated: 2023/04/25 16:45:00 by reben-ha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,19 +48,28 @@ void	add_back(t_philo **lst, t_philo *new)
 	last->next = new;
 }
 
+void	free_sem(t_data *node)
+{
+	sem_unlink(node->name);
+	free(node->name);
+}
+
 void	free_memory(t_philo *philo)
 {
 	t_philo	*tmp;
 
-	pthread_mutex_destroy(philo->print_access);
-	free(philo->info);
-	free(philo->print_access);
+	free_sem(&philo->info->fork);
+	free_sem(&philo->info->print_access);
+	free_sem(&philo->info->life_stat);
 	while (1)
 	{
+		free_sem(&philo->info->meal_count);
+		free_sem(&philo->info->last_meal);
 		tmp = philo;
 		philo = philo->next;
 		free(tmp);
 		if (philo->id == 1)
 			break ;
 	}
+	free(philo->info);
 }

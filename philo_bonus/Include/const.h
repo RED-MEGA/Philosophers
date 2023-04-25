@@ -6,7 +6,7 @@
 /*   By: reben-ha <reben-ha@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/19 00:01:56 by reben-ha          #+#    #+#             */
-/*   Updated: 2023/04/25 11:14:45 by reben-ha         ###   ########.fr       */
+/*   Updated: 2023/04/25 15:46:11 by reben-ha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,16 +46,17 @@
 
 typedef struct s_data
 {
-	long long		value;
-	sem_t			*sem;
+	char		*name;
+	long long	value;
+	sem_t		*sem;
 }					t_data;
 
 typedef struct s_info
 {
 	long long		t0;
 	t_data			life_stat;
-	sem_t			*fork;
-	sem_t			*print_access;
+	t_data			fork;
+	t_data			print_access;
 	int				nb_philo;
 	int				time_to_die;
 	int				time_to_eat;
