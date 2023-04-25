@@ -6,7 +6,7 @@
 /*   By: reben-ha <reben-ha@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/16 03:52:47 by reben-ha          #+#    #+#             */
-/*   Updated: 2023/04/24 13:27:07 by reben-ha         ###   ########.fr       */
+/*   Updated: 2023/04/25 11:57:55 by reben-ha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,6 @@ bool	init(t_philo **philo, t_info *info)
 		new_philo = new_node(id, info);
 		new_philo->print_access = print_access;
 		new_philo->meal_count.value = 0;
-		new_philo->last_meal.value = current_time();
 		pthread_mutex_init(&(new_philo->fork), NULL);
 		pthread_mutex_init(&(new_philo->last_meal.mutex), NULL);
 		pthread_mutex_init(&(new_philo->meal_count.mutex), NULL);

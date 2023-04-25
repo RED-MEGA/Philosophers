@@ -6,7 +6,7 @@
 /*   By: reben-ha <reben-ha@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/15 05:00:18 by reben-ha          #+#    #+#             */
-/*   Updated: 2023/04/24 12:49:05 by reben-ha         ###   ########.fr       */
+/*   Updated: 2023/04/25 12:00:53 by reben-ha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ static void	run_threads(t_philo *philo)
 	while (1)
 	{
 		philo->t0 = t0;
+		philo->last_meal.value = t0;
 		if (pthread_create(&philo->philo, NULL, &routine, philo) != 0)
 		{
 			perror_x("Cannot create Thread");
