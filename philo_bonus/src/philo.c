@@ -6,7 +6,7 @@
 /*   By: reben-ha <reben-ha@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/15 05:00:18 by reben-ha          #+#    #+#             */
-/*   Updated: 2023/04/25 16:32:44 by reben-ha         ###   ########.fr       */
+/*   Updated: 2023/04/25 16:48:34 by reben-ha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static void	run_philosophers(t_philo *philo)
 	t0 = current_time();
 	while (1)
 	{
-		philo->t0 = t0;
+		philo->info->t0 = t0;
 		philo->last_meal.value = t0;
 		philo->philo = fork();
 		ft_error(philo->philo, 1);
@@ -51,7 +51,7 @@ static void	check_philosophers(t_philo *philo, bool optional_arg)
 	sem_wait(philo->info->life_stat.sem);
 	philo->info->life_stat.value = false;
 	sem_post(philo->info->life_stat.sem);
-	sem_post(philo->info->print_access);
+	sem_post(philo->info->print_access.sem);
 }
 
 static void	waiting_philosophers(void)
