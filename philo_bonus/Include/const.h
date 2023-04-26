@@ -6,7 +6,7 @@
 /*   By: reben-ha <reben-ha@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/19 00:01:56 by reben-ha          #+#    #+#             */
-/*   Updated: 2023/04/25 15:46:11 by reben-ha         ###   ########.fr       */
+/*   Updated: 2023/04/26 16:44:54 by reben-ha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 # include <limits.h>
 # include <sys/time.h>
 # include <time.h>
+# include <signal.h>
 # include <pthread.h>
 # include <semaphore.h>
 

@@ -6,7 +6,7 @@
 /*   By: reben-ha <reben-ha@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/15 05:00:18 by reben-ha          #+#    #+#             */
-/*   Updated: 2023/04/26 13:48:00 by reben-ha         ###   ########.fr       */
+/*   Updated: 2023/04/26 20:04:54 by reben-ha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,8 +54,14 @@ static void	check_philosophers(t_philo *philo, bool optional_arg)
 	sem_post(philo->info->print_access.sem);
 }
 
-static void	waiting_philosophers(void)
+static void	waiting_philosophers(t_philo *philo)
 {
+	philo = philo->next;
+	while (philo->id != 1)
+	{
+		kill(philo->philo, SIGTERM);
+		philo = philo->next;
+	}
 	while (waitpid(WAIT_ANY, NULL, 0) != -1)
 		;
 }
@@ -69,7 +75,7 @@ static void	philosophers(char **argv, bool optional_arg)
 		return ;
 	run_philosophers(philo);
 	check_philosophers(philo, optional_arg);
-	waiting_philosophers();
+	waiting_philosophers(philo);
 	free_memory(philo);
 }
 
