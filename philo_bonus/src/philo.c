@@ -6,7 +6,7 @@
 /*   By: reben-ha <reben-ha@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/15 05:00:18 by reben-ha          #+#    #+#             */
-/*   Updated: 2023/04/25 16:48:34 by reben-ha         ###   ########.fr       */
+/*   Updated: 2023/04/26 13:48:00 by reben-ha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static void	run_philosophers(t_philo *philo)
 		philo->philo = fork();
 		ft_error(philo->philo, 1);
 		if (philo->philo == 0)
-			routine(philo); // Note: add exit() to the end of routine
+			routine(philo);
 		philo = philo->next;
 		if (philo->id == 1)
 			break ;
@@ -67,7 +67,6 @@ static void	philosophers(char **argv, bool optional_arg)
 
 	if (!parsing(argv, &info, optional_arg) || !init(&philo, info))
 		return ;
-
 	run_philosophers(philo);
 	check_philosophers(philo, optional_arg);
 	waiting_philosophers();

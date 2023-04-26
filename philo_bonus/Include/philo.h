@@ -6,7 +6,7 @@
 /*   By: reben-ha <reben-ha@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/15 05:02:14 by reben-ha          #+#    #+#             */
-/*   Updated: 2023/04/25 16:14:06 by reben-ha         ###   ########.fr       */
+/*   Updated: 2023/04/26 13:46:12 by reben-ha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 bool		parsing(char **argv, t_info **info, bool optional_arg);
 bool		init(t_philo **philo, t_info *info);
 bool		new_sem(t_data *sem_node, int ini_value, const char *name, bool include_id);
-void		*routine(void *ptr);
+void		routine(t_philo *philo);
 bool		print_stat(t_philo *philo, char *stat, char *color, int unlock);
 long long	current_time(void);
 void		delay_maker(bool delay);
