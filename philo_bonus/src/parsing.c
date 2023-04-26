@@ -6,7 +6,7 @@
 /*   By: reben-ha <reben-ha@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/16 03:52:47 by reben-ha          #+#    #+#             */
-/*   Updated: 2023/04/25 16:21:37 by reben-ha         ###   ########.fr       */
+/*   Updated: 2023/04/26 21:54:17 by reben-ha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,15 +82,15 @@ bool	init(t_philo **philo, t_info *info)
 	int		id;
 
 	(*philo) = NULL;
-	new_sem(&info->fork, info->nb_philo, "fork", false);
-	new_sem(&info->print_access, 1, "print_access", false);
-	new_sem(&info->life_stat, 1, "life_stat", false);
+	new_sem(&info->fork, info->nb_philo, ft_strjoin("fork-", "0", false));
+	new_sem(&info->print_access, 1, ft_strjoin("print_access-", "0", false));
+	new_sem(&info->life_stat, 1, ft_strjoin("life_stat-", "0", false));
 	id = 0;
 	while (id++ < info->nb_philo)
 	{
 		new_philo = new_node(id, info);
-		new_sem(&new_philo->last_meal, 1, "last_meal", true);
-		new_sem(&new_philo->meal_count, 1, "meal_count", true);
+		new_sem(&new_philo->last_meal, 1, ft_strjoin("last_meal-", ft_itoa(id), false));
+		new_sem(&new_philo->meal_count, 1, ft_strjoin("meal_count-", ft_itoa(id), false));
 		new_philo->meal_count.value = 0;
 		add_back(philo, new_philo);
 	}

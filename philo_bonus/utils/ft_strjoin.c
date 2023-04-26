@@ -6,7 +6,7 @@
 /*   By: reben-ha <reben-ha@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/21 20:36:45 by reben-ha          #+#    #+#             */
-/*   Updated: 2023/04/25 16:10:38 by reben-ha         ###   ########.fr       */
+/*   Updated: 2023/04/26 21:55:35 by reben-ha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static char	*cheack(char const *s1, char const *s2)
 	return (NULL);
 }
 
-char	*ft_strjoin(char *s1, char const *s2)
+char	*ft_strjoin(char *s1, char const *s2, bool should_free)
 {
 	size_t	i;
 	size_t	j;
@@ -47,5 +47,7 @@ char	*ft_strjoin(char *s1, char const *s2)
 		i++;
 	}
 	sjoin[i] = '\0';
-	return (free(s1), sjoin);
+	if (should_free)
+		free(s1);
+	return (sjoin);
 }

@@ -6,7 +6,7 @@
 /*   By: reben-ha <reben-ha@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/06 18:34:12 by reben-ha          #+#    #+#             */
-/*   Updated: 2023/04/25 16:49:44 by reben-ha         ###   ########.fr       */
+/*   Updated: 2023/04/26 21:51:35 by reben-ha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ char	**ft_split(char const *s, char c);
 char	*ft_strchr(const char *str, int c);
 char	*ft_strdup(const char *s1);
 void	ft_striteri(char *s, void (*f)(unsigned int, char*));
-char	*ft_strjoin(char *s1, char const *s2);
+char	*ft_strjoin(char *s1, char const *s2, bool free);
 size_t	ft_strlcat(char *dest, const char *src, size_t len);
 size_t	ft_strlcpy(char *dest, const char *src, size_t destsize);
 size_t	ft_strlen(const char *str);
