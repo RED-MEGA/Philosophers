@@ -6,7 +6,7 @@
 /*   By: reben-ha <reben-ha@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/15 05:00:18 by reben-ha          #+#    #+#             */
-/*   Updated: 2023/04/28 10:22:48 by reben-ha         ###   ########.fr       */
+/*   Updated: 2023/04/28 13:59:36 by reben-ha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,28 +31,28 @@ static void	run_philosophers(t_philo *philo)
 	}
 }
 
-static void	check_philosophers(t_philo *philo, bool optional_arg)
-{
-	while (philo)
-	{
-		sem_wait(philo->last_meal.sem);
-		sem_wait(philo->meal_count.sem);
-		if (current_time() - philo->last_meal.value >= philo->info->time_to_die
-			|| (optional_arg == true
-				&& philo->meal_count.value == philo->info->limit_eat))
-		{
-			print_stat(philo, "Dead 🧟‍", C_DEATH, false);
-			break ;
-		}
-		sem_post(philo->last_meal.sem);
-		sem_post(philo->meal_count.sem);
-		philo = philo->next;
-	}
-	sem_wait(philo->info->life_stat.sem);
-	philo->info->life_stat.value = false;
-	sem_post(philo->info->life_stat.sem);
-	sem_post(philo->info->print_access.sem);
-}
+// static void	check_philosophers(t_philo *philo, bool optional_arg)
+// {
+// 	while (philo)
+// 	{
+// 		sem_wait(philo->last_meal.sem);
+// 		sem_wait(philo->meal_count.sem);
+// 		if (current_time() - philo->last_meal.value >= philo->info->time_to_die
+// 			|| (optional_arg == true
+// 				&& philo->meal_count.value == philo->info->limit_eat))
+// 		{
+// 			print_stat(philo, "Dead 🧟‍", C_DEATH, false);
+// 			break ;
+// 		}
+// 		sem_post(philo->last_meal.sem);
+// 		sem_post(philo->meal_count.sem);
+// 		philo = philo->next;
+// 	}
+// 	sem_wait(philo->info->life_stat.sem);
+// 	philo->info->life_stat.value = false;
+// 	sem_post(philo->info->life_stat.sem);
+// 	sem_post(philo->info->print_access.sem);
+// }
 
 static void	waiting_philosophers(t_philo *philo)
 {
@@ -74,7 +74,7 @@ static void	philosophers(char **argv, bool optional_arg)
 	if (!parsing(argv, &info, optional_arg) || !init(&philo, info))
 		return ;
 	run_philosophers(philo);
-	check_philosophers(philo, optional_arg);
+	// check_philosophers(philo, optional_arg);
 	waiting_philosophers(philo);
 	// free_memory(philo);
 }

@@ -6,7 +6,7 @@
 /*   By: reben-ha <reben-ha@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/16 22:19:02 by reben-ha          #+#    #+#             */
-/*   Updated: 2023/04/26 14:23:50 by reben-ha         ###   ########.fr       */
+/*   Updated: 2023/04/28 14:01:27 by reben-ha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,9 +42,11 @@ static void	eating(t_philo *philo)
 	sem_wait(philo->meal_count.sem);
 	philo->meal_count.value += 1;
 	sem_post(philo->meal_count.sem);
+
 	sem_wait(philo->last_meal.sem);
 	philo->last_meal.value = current_time();
 	sem_post(philo->last_meal.sem);
+
 	if (print_stat(philo, "Take fork", C_EAT, true) == false)
 		return ;
 	if (print_stat(philo, "Eating", C_EAT, true) == false)
@@ -61,9 +63,40 @@ static void	sleeping(t_philo *philo)
 	usleep_x(philo->info->time_to_sleep);
 }
 
+static void	*check_philosophers(void *ptr)
+{
+	t_philo	*philo;
+	bool	optional_arg;
+
+	philo = (t_philo *)ptr;
+	optional_arg = (philo->info->limit_eat != FAIL);
+	while (philo)
+	{
+		sem_wait(philo->last_meal.sem);
+		sem_wait(philo->meal_count.sem);
+		if (current_time() - philo->last_meal.value >= philo->info->time_to_die
+			|| (optional_arg == true
+				&& philo->meal_count.value == philo->info->limit_eat))
+		{
+			print_stat(philo, "Dead 🧟‍", C_DEATH, false);
+			break ;
+		}
+		sem_post(philo->last_meal.sem);
+		sem_post(philo->meal_count.sem);
+		philo = philo->next;
+	}
+	sem_wait(philo->info->life_stat.sem);
+	philo->info->life_stat.value = false;
+	sem_post(philo->info->life_stat.sem);
+	sem_post(philo->info->print_access.sem);
+	return (NULL);
+}
+
 void	routine(t_philo *philo)
 {
-	delay_maker(philo->id % 2 == 0);
+	pthread_t	checker_thread;
+
+	pthread_create(&checker_thread, NULL, &check_philosophers, philo);
 	while (1)
 	{
 		eating(philo);
@@ -76,5 +109,6 @@ void	routine(t_philo *philo)
 		if (!get_life_state(philo))
 			break ;
 	}
+	pthread_join(checker_thread, NULL);
 	exit(0);
 }
