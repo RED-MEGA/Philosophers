@@ -6,7 +6,7 @@
 /*   By: reben-ha <reben-ha@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/15 05:00:18 by reben-ha          #+#    #+#             */
-/*   Updated: 2023/04/28 13:59:36 by reben-ha         ###   ########.fr       */
+/*   Updated: 2023/04/28 20:56:37 by reben-ha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static void	run_philosophers(t_philo *philo)
 	long long		t0;
 
 	t0 = current_time();
-	while (1)
+	while (true)
 	{
 		philo->info->t0 = t0;
 		philo->last_meal.value = t0;
@@ -56,12 +56,6 @@ static void	run_philosophers(t_philo *philo)
 
 static void	waiting_philosophers(t_philo *philo)
 {
-	philo = philo->next;
-	while (philo->id != 1)
-	{
-		kill(philo->philo, SIGTERM);
-		philo = philo->next;
-	}
 	while (waitpid(WAIT_ANY, NULL, 0) != -1)
 		;
 }

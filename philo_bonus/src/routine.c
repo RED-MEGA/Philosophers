@@ -6,7 +6,7 @@
 /*   By: reben-ha <reben-ha@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/16 22:19:02 by reben-ha          #+#    #+#             */
-/*   Updated: 2023/04/28 14:01:27 by reben-ha         ###   ########.fr       */
+/*   Updated: 2023/04/28 21:00:56 by reben-ha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ static void	*check_philosophers(void *ptr)
 
 	philo = (t_philo *)ptr;
 	optional_arg = (philo->info->limit_eat != FAIL);
-	while (philo)
+	while (true)
 	{
 		sem_wait(philo->last_meal.sem);
 		sem_wait(philo->meal_count.sem);
@@ -79,11 +79,11 @@ static void	*check_philosophers(void *ptr)
 				&& philo->meal_count.value == philo->info->limit_eat))
 		{
 			print_stat(philo, "Dead 🧟‍", C_DEATH, false);
+			kill(0, SIGINT);
 			break ;
 		}
 		sem_post(philo->last_meal.sem);
 		sem_post(philo->meal_count.sem);
-		philo = philo->next;
 	}
 	sem_wait(philo->info->life_stat.sem);
 	philo->info->life_stat.value = false;
