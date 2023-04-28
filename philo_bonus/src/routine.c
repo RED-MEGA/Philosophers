@@ -6,7 +6,7 @@
 /*   By: reben-ha <reben-ha@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/16 22:19:02 by reben-ha          #+#    #+#             */
-/*   Updated: 2023/04/28 21:00:56 by reben-ha         ###   ########.fr       */
+/*   Updated: 2023/04/28 21:03:06 by reben-ha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,15 +38,12 @@ static void	eating(t_philo *philo)
 {
 	sem_wait(philo->info->fork.sem);
 	sem_wait(philo->info->fork.sem);
-
 	sem_wait(philo->meal_count.sem);
 	philo->meal_count.value += 1;
 	sem_post(philo->meal_count.sem);
-
 	sem_wait(philo->last_meal.sem);
 	philo->last_meal.value = current_time();
 	sem_post(philo->last_meal.sem);
-
 	if (print_stat(philo, "Take fork", C_EAT, true) == false)
 		return ;
 	if (print_stat(philo, "Eating", C_EAT, true) == false)

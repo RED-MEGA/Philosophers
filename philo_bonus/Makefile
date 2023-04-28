@@ -6,13 +6,13 @@
 #    By: reben-ha <reben-ha@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/18 16:20:52 by reben-ha          #+#    #+#              #
-#    Updated: 2023/04/28 20:54:05 by reben-ha         ###   ########.fr        #
+#    Updated: 2023/04/28 21:04:24 by reben-ha         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = philo_bonus
 
-FLAGS = # -Wall -Wextra -Werror -g -pthread -fsanitize=address
+FLAGS = -Wall -Wextra -Werror #-g -pthread -fsanitize=address
 
 SRC = src/philo.c \
 	src/parsing.c \

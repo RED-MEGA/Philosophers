@@ -6,7 +6,7 @@
 /*   By: reben-ha <reben-ha@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/16 03:52:47 by reben-ha          #+#    #+#             */
-/*   Updated: 2023/04/26 21:54:17 by reben-ha         ###   ########.fr       */
+/*   Updated: 2023/04/28 21:06:09 by reben-ha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,8 +89,10 @@ bool	init(t_philo **philo, t_info *info)
 	while (id++ < info->nb_philo)
 	{
 		new_philo = new_node(id, info);
-		new_sem(&new_philo->last_meal, 1, ft_strjoin("last_meal-", ft_itoa(id), false));
-		new_sem(&new_philo->meal_count, 1, ft_strjoin("meal_count-", ft_itoa(id), false));
+		new_sem(&new_philo->last_meal, 1,
+			ft_strjoin("last_meal-", ft_itoa(id), false));
+		new_sem(&new_philo->meal_count, 1,
+			ft_strjoin("meal_count-", ft_itoa(id), false));
 		new_philo->meal_count.value = 0;
 		add_back(philo, new_philo);
 	}
