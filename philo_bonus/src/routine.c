@@ -6,7 +6,7 @@
 /*   By: reben-ha <reben-ha@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/16 22:19:02 by reben-ha          #+#    #+#             */
-/*   Updated: 2023/04/28 21:03:06 by reben-ha         ###   ########.fr       */
+/*   Updated: 2023/04/30 20:51:16 by reben-ha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,7 @@ static void	*check_philosophers(void *ptr)
 	optional_arg = (philo->info->limit_eat != FAIL);
 	while (true)
 	{
+		usleep_x(100);
 		sem_wait(philo->last_meal.sem);
 		sem_wait(philo->meal_count.sem);
 		if (current_time() - philo->last_meal.value >= philo->info->time_to_die
