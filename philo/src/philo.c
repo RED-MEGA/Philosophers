@@ -6,7 +6,7 @@
 /*   By: reben-ha <reben-ha@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/15 05:00:18 by reben-ha          #+#    #+#             */
-/*   Updated: 2023/05/01 17:17:18 by reben-ha         ###   ########.fr       */
+/*   Updated: 2023/05/03 17:32:58 by reben-ha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,23 +30,52 @@ static void	run_threads(t_philo *philo)
 		if (philo->id == 1)
 			break ;
 	}
+	while (1)
+	{
+		pthread_detach(philo->philo);
+		philo = philo->next;
+		if (philo->id == 1)
+			break ;
+	}
+}
+
+bool	get_eat_stat(t_philo *philo)
+{
+	while (1)
+	{
+		pthread_mutex_lock(&philo->meal_count.mutex);
+		if (philo->meal_count.value < philo->info->limit_eat)
+		{
+			pthread_mutex_unlock(&philo->meal_count.mutex);
+			return (false);
+		}
+		pthread_mutex_unlock(&philo->meal_count.mutex);
+		philo = philo->next;
+		if (philo->id == 1)
+			break ;
+	}
+	return (true);
 }
 
 static void	check_threads(t_philo *philo, bool optional_arg)
 {
-	while (philo)
+	t_philo	*head;
+
+	head = philo;
+	while (1)
 	{
 		pthread_mutex_lock(&philo->last_meal.mutex);
-		pthread_mutex_lock(&philo->meal_count.mutex);
-		if (current_time() - philo->last_meal.value >= philo->info->time_to_die
-			|| (optional_arg == true
-				&& philo->meal_count.value == philo->info->limit_eat))
-		{
+		if (current_time() - philo->last_meal.value >= philo->info->time_to_die)
+		{	
 			print_stat(philo, "Dead 🧟‍", C_DEATH, false);
 			break ;
 		}
+		else if (optional_arg && get_eat_stat(head))
+		{
+			pthread_mutex_lock(philo->print_access);
+			break ;
+		}
 		pthread_mutex_unlock(&philo->last_meal.mutex);
-		pthread_mutex_unlock(&philo->meal_count.mutex);
 		philo = philo->next;
 	}
 	pthread_mutex_lock(&philo->info->life_stat.mutex);
@@ -72,11 +101,10 @@ static void	waiting_threads(t_philo *philo)
 	// i = 0;
 	// while (++i <= philo->info->nb_philo)
 	// {
-	// 	if (pthread_detach(philo->philo) != 0)
+	// 	if (pthread_join(philo->philo, NULL) != 0)
 	// 		perror_x("Unable to join");
 	// 	philo = philo->next;
 	// }
-
 }
 
 static void	philosophers(char **argv, bool optional_arg)

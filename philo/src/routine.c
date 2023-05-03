@@ -6,7 +6,7 @@
 /*   By: reben-ha <reben-ha@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/16 22:19:02 by reben-ha          #+#    #+#             */
-/*   Updated: 2023/04/23 21:27:55 by reben-ha         ###   ########.fr       */
+/*   Updated: 2023/05/03 18:36:31 by reben-ha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,15 +37,17 @@ bool	print_stat(t_philo *philo, char *stat, char *color, int unlock)
 static void	eating(t_philo *philo)
 {
 	pthread_mutex_lock(&philo->fork);
+	if (print_stat(philo, "Take fork", C_EAT, true) == false)
+		return ;
 	pthread_mutex_lock(&philo->next->fork);
+	if (print_stat(philo, "Take fork", C_EAT, true) == false)
+		return ;
 	pthread_mutex_lock(&philo->meal_count.mutex);
 	philo->meal_count.value += 1;
 	pthread_mutex_unlock(&philo->meal_count.mutex);
 	pthread_mutex_lock(&philo->last_meal.mutex);
 	philo->last_meal.value = current_time();
 	pthread_mutex_unlock(&philo->last_meal.mutex);
-	if (print_stat(philo, "Take fork", C_EAT, true) == false)
-		return ;
 	if (print_stat(philo, "Eating", C_EAT, true) == false)
 		return ;
 	usleep_x(philo->info->time_to_eat);
@@ -70,13 +72,13 @@ void	*routine(void *ptr)
 	{
 		eating(philo);
 		if (!get_life_state(philo))
-			return (false);
+			break ;
 		sleeping(philo);
 		if (!get_life_state(philo))
-			return (false);
+			break ;
 		print_stat(philo, "thinking", C_THINK, true);
 		if (!get_life_state(philo))
-			return (false);
+			break ;
 	}
 	return (NULL);
 }
