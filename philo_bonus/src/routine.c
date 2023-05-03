@@ -6,7 +6,7 @@
 /*   By: reben-ha <reben-ha@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/16 22:19:02 by reben-ha          #+#    #+#             */
-/*   Updated: 2023/04/30 20:51:16 by reben-ha         ###   ########.fr       */
+/*   Updated: 2023/05/03 18:45:27 by reben-ha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,8 +86,7 @@ static void	*check_philosophers(void *ptr)
 	sem_wait(philo->info->life_stat.sem);
 	philo->info->life_stat.value = false;
 	sem_post(philo->info->life_stat.sem);
-	sem_post(philo->info->print_access.sem);
-	return (NULL);
+	return (sem_post(philo->info->print_access.sem), NULL);
 }
 
 void	routine(t_philo *philo)
