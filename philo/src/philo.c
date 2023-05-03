@@ -6,7 +6,7 @@
 /*   By: reben-ha <reben-ha@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/15 05:00:18 by reben-ha          #+#    #+#             */
-/*   Updated: 2023/05/03 17:32:58 by reben-ha         ###   ########.fr       */
+/*   Updated: 2023/05/03 18:49:42 by reben-ha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,13 +26,6 @@ static void	run_threads(t_philo *philo)
 			perror_x("Cannot create Thread");
 			break ;
 		}
-		philo = philo->next;
-		if (philo->id == 1)
-			break ;
-	}
-	while (1)
-	{
-		pthread_detach(philo->philo);
 		philo = philo->next;
 		if (philo->id == 1)
 			break ;
@@ -86,15 +79,15 @@ static void	check_threads(t_philo *philo, bool optional_arg)
 
 static void	waiting_threads(t_philo *philo)
 {
-	// int	i;
+	int	i;
 
-	// i = 0;
-	// while (++i <= philo->info->nb_philo)
-	// {
-	// 	if (pthread_detach(philo->philo) != 0)
-	// 		perror_x("Unable to join");
-	// 	philo = philo->next;
-	// }
+	i = 0;
+	while (++i <= philo->info->nb_philo)
+	{
+		if (pthread_detach(philo->philo) != 0)
+			perror_x("Unable to join");
+		philo = philo->next;
+	}
 
 	// int	i;
 
