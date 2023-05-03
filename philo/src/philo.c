@@ -6,7 +6,7 @@
 /*   By: reben-ha <reben-ha@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/15 05:00:18 by reben-ha          #+#    #+#             */
-/*   Updated: 2023/04/25 12:00:53 by reben-ha         ###   ########.fr       */
+/*   Updated: 2023/05/01 17:17:18 by reben-ha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,15 +57,26 @@ static void	check_threads(t_philo *philo, bool optional_arg)
 
 static void	waiting_threads(t_philo *philo)
 {
-	int	i;
+	// int	i;
 
-	i = 0;
-	while (++i <= philo->info->nb_philo)
-	{
-		if (pthread_join(philo->philo, NULL) != 0)
-			perror_x("Unable to join");
-		philo = philo->next;
-	}
+	// i = 0;
+	// while (++i <= philo->info->nb_philo)
+	// {
+	// 	if (pthread_detach(philo->philo) != 0)
+	// 		perror_x("Unable to join");
+	// 	philo = philo->next;
+	// }
+
+	// int	i;
+
+	// i = 0;
+	// while (++i <= philo->info->nb_philo)
+	// {
+	// 	if (pthread_detach(philo->philo) != 0)
+	// 		perror_x("Unable to join");
+	// 	philo = philo->next;
+	// }
+
 }
 
 static void	philosophers(char **argv, bool optional_arg)
