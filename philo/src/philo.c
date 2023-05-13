@@ -6,7 +6,7 @@
 /*   By: reben-ha <reben-ha@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/15 05:00:18 by reben-ha          #+#    #+#             */
-/*   Updated: 2023/05/08 22:39:02 by reben-ha         ###   ########.fr       */
+/*   Updated: 2023/05/13 20:45:48 by reben-ha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,7 +111,6 @@ static void	philosophers(char **argv, bool optional_arg)
 	run_threads(philo);
 	check_threads(philo, optional_arg);
 	waiting_threads(philo);
-	while (1);
 	// free_memory(philo);
 }
 
