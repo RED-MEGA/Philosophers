@@ -6,7 +6,7 @@
 /*   By: reben-ha <reben-ha@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/15 05:00:18 by reben-ha          #+#    #+#             */
-/*   Updated: 2023/05/14 21:08:51 by reben-ha         ###   ########.fr       */
+/*   Updated: 2023/05/14 21:13:45 by reben-ha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,8 +78,8 @@ static void	check_threads(t_philo *philo, bool optional_arg)
 
 static void	philosophers(char **argv, bool optional_arg)
 {
-	t_philo			*philo;
-	t_info			*info;
+	t_philo	*philo;
+	t_info	*info;
 
 	if (!parsing(argv, &info, optional_arg))
 		return ;
