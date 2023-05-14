@@ -6,7 +6,7 @@
 /*   By: reben-ha <reben-ha@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/15 05:00:18 by reben-ha          #+#    #+#             */
-/*   Updated: 2023/05/14 16:09:58 by reben-ha         ###   ########.fr       */
+/*   Updated: 2023/05/14 16:15:59 by reben-ha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ static void	check_threads(t_philo *philo, bool optional_arg)
 		else if (optional_arg && get_eat_stat(head))
 		{
 			pthread_mutex_lock(philo->print_access);
+			printf("All philo Eat\n");
 			break ;
 		}
 		pthread_mutex_unlock(&philo->last_meal.mutex);

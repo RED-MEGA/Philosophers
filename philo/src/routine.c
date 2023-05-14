@@ -6,7 +6,7 @@
 /*   By: reben-ha <reben-ha@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/16 22:19:02 by reben-ha          #+#    #+#             */
-/*   Updated: 2023/05/14 16:11:23 by reben-ha         ###   ########.fr       */
+/*   Updated: 2023/05/14 16:14:30 by reben-ha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static bool	get_life_state(t_philo *philo)
 	return (life_stat);
 }
 
-bool	print_stat(t_philo *philo, char *stat, char *color, int unlock)
+bool	print_stat(t_philo *philo, char *stat, char *color, bool unlock)
 {
 	pthread_mutex_lock(philo->print_access);
 	if (!get_life_state(philo))
