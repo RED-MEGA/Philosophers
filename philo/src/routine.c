@@ -6,7 +6,7 @@
 /*   By: reben-ha <reben-ha@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/16 22:19:02 by reben-ha          #+#    #+#             */
-/*   Updated: 2023/05/14 18:28:48 by reben-ha         ###   ########.fr       */
+/*   Updated: 2023/05/14 20:53:02 by reben-ha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ static void	eating(t_philo *philo)
 
 static void	sleeping(t_philo *philo)
 {
-	print_stat(philo, "is sleeping", C_SLEEP, true)
+	print_stat(philo, "is sleeping", C_SLEEP, true);
 	usleep_x(philo->info->time_to_sleep);
 }
 
