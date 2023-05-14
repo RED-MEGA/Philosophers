@@ -6,7 +6,7 @@
 /*   By: reben-ha <reben-ha@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/15 05:00:18 by reben-ha          #+#    #+#             */
-/*   Updated: 2023/05/14 18:15:53 by reben-ha         ###   ########.fr       */
+/*   Updated: 2023/05/14 18:34:26 by reben-ha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,51 +67,12 @@ static void	check_threads(t_philo *philo, bool optional_arg)
 		else if (optional_arg && get_eat_stat(head))
 		{
 			pthread_mutex_lock(philo->print_access);
-			printf("All philo Eat\n");
-			printf("%d : %lld\n", head->id, head->meal_count.value);
-			head = head->next;
-			
-			printf("%d : %lld\n", head->id, head->meal_count.value);
-			head = head->next;
-			
-			printf("%d : %lld\n", head->id, head->meal_count.value);
-			head = head->next;
-			
-			printf("%d : %lld\n", head->id, head->meal_count.value);
-			head = head->next;
-			
+			printf("%lld All philosophers Eat %d time\n", philo->t0, philo->info->limit_eat);
 			break ;
 		}
 		pthread_mutex_unlock(&philo->last_meal.mutex);
 		philo = philo->next;
 	}
-	pthread_mutex_lock(&philo->info->life_stat.mutex);
-	// philo->info->life_stat.value = false;
-	// pthread_mutex_unlock(&philo->info->life_stat.mutex);
-	// pthread_mutex_unlock(philo->print_access);
-}
-
-static void	waiting_threads(t_philo *philo)
-{
-	// int	i;
-
-	// i = 0;
-	// while (++i <= philo->info->nb_philo)
-	// {
-	// 	if (pthread_detach(philo->philo) != 0)
-	// 		perror_x("Unable to join");
-	// 	philo = philo->next;
-	// }
-
-	// int	i;
-
-	// i = 0;
-	// while (++i <= philo->info->nb_philo)
-	// {
-	// 	if (pthread_join(philo->philo, NULL) != 0)
-	// 		perror_x("Unable to join");
-	// 	philo = philo->next;
-	// }
 }
 
 static void	philosophers(char **argv, bool optional_arg)
@@ -119,7 +80,9 @@ static void	philosophers(char **argv, bool optional_arg)
 	t_philo			*philo;
 	t_info			*info;
 
-	if (!parsing(argv, &info, optional_arg) || !init(&philo, info))
+	if (!parsing(argv, &info, optional_arg))
+		return ;
+	if (!init(&philo, info))
 		return ;
 	run_threads(philo);
 	check_threads(philo, optional_arg);
