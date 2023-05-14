@@ -6,7 +6,7 @@
 /*   By: reben-ha <reben-ha@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/15 05:00:18 by reben-ha          #+#    #+#             */
-/*   Updated: 2023/05/13 20:45:48 by reben-ha         ###   ########.fr       */
+/*   Updated: 2023/05/14 16:09:58 by reben-ha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ static void	check_threads(t_philo *philo, bool optional_arg)
 		pthread_mutex_lock(&philo->last_meal.mutex);
 		if (current_time() - philo->last_meal.value >= philo->info->time_to_die)
 		{	
-			print_stat(philo, "Dead 🧟‍", C_DEATH, false);
+			print_stat(philo, "died", C_DEATH, false);
 			break ;
 		}
 		else if (optional_arg && get_eat_stat(head))
@@ -73,9 +73,9 @@ static void	check_threads(t_philo *philo, bool optional_arg)
 		philo = philo->next;
 	}
 	pthread_mutex_lock(&philo->info->life_stat.mutex);
-	philo->info->life_stat.value = false;
-	pthread_mutex_unlock(&philo->info->life_stat.mutex);
-	pthread_mutex_unlock(philo->print_access);
+	// philo->info->life_stat.value = false;
+	// pthread_mutex_unlock(&philo->info->life_stat.mutex);
+	// pthread_mutex_unlock(philo->print_access);
 }
 
 static void	waiting_threads(t_philo *philo)
@@ -110,8 +110,8 @@ static void	philosophers(char **argv, bool optional_arg)
 		return ;
 	run_threads(philo);
 	check_threads(philo, optional_arg);
-	waiting_threads(philo);
 	// free_memory(philo);
+	// system("leaks philo");
 }
 
 int	main(int argc, char **argv)
