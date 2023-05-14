@@ -6,7 +6,7 @@
 /*   By: reben-ha <reben-ha@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/15 05:00:18 by reben-ha          #+#    #+#             */
-/*   Updated: 2023/05/14 18:34:26 by reben-ha         ###   ########.fr       */
+/*   Updated: 2023/05/14 21:08:51 by reben-ha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,8 @@ static void	check_threads(t_philo *philo, bool optional_arg)
 		else if (optional_arg && get_eat_stat(head))
 		{
 			pthread_mutex_lock(philo->print_access);
-			printf("%lld All philosophers Eat %d time\n", philo->t0, philo->info->limit_eat);
+			printf("\033[1;31m%lld All philosophers Eat %d time\e[0m\n",
+					(current_time() - philo->t0), philo->info->limit_eat);
 			break ;
 		}
 		pthread_mutex_unlock(&philo->last_meal.mutex);
@@ -89,8 +90,14 @@ static void	philosophers(char **argv, bool optional_arg)
 	// free_memory(philo);
 }
 
+void	leaks()
+{
+	system("leaks philo > Debug.log");
+}
+
 int	main(int argc, char **argv)
 {
+	atexit(leaks);
 	if (argc == 5 || argc == 6)
 		philosophers(argv, (argc == 6));
 	else
