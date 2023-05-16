@@ -6,7 +6,7 @@
 /*   By: reben-ha <reben-ha@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/15 05:00:18 by reben-ha          #+#    #+#             */
-/*   Updated: 2023/05/14 21:13:45 by reben-ha         ###   ########.fr       */
+/*   Updated: 2023/05/16 17:50:12 by reben-ha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ static void	check_threads(t_philo *philo, bool optional_arg)
 	head = philo;
 	while (1)
 	{
+		usleep_x(10);
 		pthread_mutex_lock(&philo->last_meal.mutex);
 		if (current_time() - philo->last_meal.value >= philo->info->time_to_die)
 		{	
