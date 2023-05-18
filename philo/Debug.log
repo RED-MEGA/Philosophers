@@ -1,20 +1,23 @@
-Process:         philo [7897]
+Process:         philo [9597]
 Path:            /Volumes/VOLUME/*/philo
-Load Address:    0x10b778000
+Load Address:    0x108860000
 Identifier:      philo
 Version:         ???
 Code Type:       X86-64
-Parent Process:  zsh [3910]
+Parent Process:  zsh [3901]
 
-Date/Time:       2023-05-14 21:10:32.576 +0100
-Launch Time:     2023-05-14 21:10:32.259 +0100
-OS Version:      Mac OS X 10.14.6 (18G9323)
+Date/Time:       2023-05-18 15:45:26.477 +0100
+Launch Time:     2023-05-18 15:45:25.621 +0100
+OS Version:      Mac OS X 10.15.7 (19H2026)
 Report Version:  7
 Analysis Tool:   /Applications/Xcode.app/Contents/Developer/usr/bin/leaks
-Analysis Tool Version:  Xcode 11.3.1 (11C505)
+Analysis Tool Version:  Xcode 12.4 (12D4e)
+
+Physical footprint:         360K
+Physical footprint (peak):  360K
 ----
 
 leaks Report Version: 4.0
-Process 7897: 170 nodes malloced for 19 KB
-Process 7897: 0 leaks for 0 total leaked bytes.
+Process 9597: 162 nodes malloced for 13 KB
+Process 9597: 0 leaks for 0 total leaked bytes.
 

@@ -6,7 +6,7 @@
 /*   By: reben-ha <reben-ha@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/23 21:25:49 by reben-ha          #+#    #+#             */
-/*   Updated: 2023/04/23 21:27:20 by reben-ha         ###   ########.fr       */
+/*   Updated: 2023/05/18 15:59:21 by reben-ha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	usleep_x(long long time_to)
 
 	start = current_time();
 	while (current_time() - start < time_to)
-		usleep(10);
+		usleep(100);
 }
 
 void	delay_maker(bool delay)
