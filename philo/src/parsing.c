@@ -6,60 +6,35 @@
 /*   By: reben-ha <reben-ha@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/16 03:52:47 by reben-ha          #+#    #+#             */
-/*   Updated: 2023/04/25 11:57:55 by reben-ha         ###   ########.fr       */
+/*   Updated: 2023/05/19 16:25:23 by reben-ha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../Include/philo.h"
 
-static bool	before_nb(char *arg)
-{
-	int	i;
-
-	i = 0;
-	while (arg[i])
-	{
-		if (isnb(arg[i + 1]) == 1
-			&& isnb(arg[i]) == 0
-			&& arg[i] != ' '
-			&& arg[i] != '+')
-			return (false);
-		i++;
-	}
-	return (true);
-}
-
-static bool	after_nb(char *arg)
-{
-	int	i;
-
-	i = 0;
-	while (arg[i])
-	{
-		if (isnb(arg[i]) == 1
-			&& isnb(arg[i + 1]) == 0
-			&& arg[i + 1] != ' '
-			&& arg[i + 1] != '\0')
-			return (false);
-		i++;
-	}
-	return (true);
-}
-
 static bool	check_format(char **argv)
 {
 	int	i;
+	int	j;
 
-	i = -1;
-	while (argv[++i])
-		if (before_nb(argv[i]) == false || after_nb(argv[i]) == false)
-			return (perror_x(ERRINVALID), false);
+	i = 1;
+	while (argv[i])
+	{
+		j = 0;
+		while (argv[i][j])
+		{
+			if (isnb(argv[i][j]) == false)
+				return (perror_x(ERRINVALID), false);
+			j++;
+		}
+		i++;
+	}
 	return (true);
 }
 
 bool	parsing(char **argv, t_info **info, bool optional_arg)
 {
-	if (check_format(&argv[1]) == false)
+	if (check_format(argv) == false)
 		return (false);
 	(*info) = (t_info *)malloc(sizeof(t_info));
 	if (!(*info))

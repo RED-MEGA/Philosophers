@@ -12,11 +12,11 @@
 
 #include "../Include/utils.h"
 
-int	isnb(int c)
+bool	isnb(int c)
 {
 	if (c >= 48 && c <= 57)
-		return (1);
-	return (0);
+		return (true);
+	return (false);
 }
 
 int	to_int(const char *str)
